@@ -1,0 +1,11 @@
+/venv
+/.idea
+*/**/node_modules
+AAIGRID
+GEOTIFF
+tiles
+*.npy
+cache
+temp.vrt
+Kazakhstan_GISdata_LTAym_YearlyMonthlyTotals_AAIGRID.zip
+Kazakhstan_GISdata_LTAym_YearlyMonthlyTotals_GEOTIFF.zip

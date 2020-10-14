@@ -1,0 +1,87 @@
+import io
+
+from flask import Flask, send_file
+import matplotlib.pyplot as plt
+import matplotlib as mpl
+import numpy as np
+from PIL import Image
+import os
+import matplotlib.image as mpimg
+
+Image.MAX_IMAGE_PIXELS = None
+
+# img = np.loadtxt("DNI.asc", skiprows=6)
+dni = np.load('dni.npy', mmap_mode='r')
+
+app = Flask(__name__)
+
+
+def world2Pixel_yours(lng, lat):  # x is Longitude and y is Latitude
+    # 40 N  46 E
+    # lat   lng
+    ulX = 46.000000000000  # lng
+    # ulY = 40.000000000000
+    ulY = 56.000000000000  # lat
+    cols = 16800
+    rows = 6400
+    e = 0.002500000000
+
+    pixel_x = int((lng - ulX) / e)
+    pixel_y = int((lat - ulY) / e)
+    if pixel_x < 0 or pixel_x > dni.shape[1] or pixel_y < 0 or pixel_y > dni.shape[0]:
+        return -1, -1
+    return (pixel_x, pixel_y)
+
+
+def world2Pixel_square(lat, lng, width):  # x is Longitude and y is Latitude
+    # 40 N  46 E
+    # lat   lng
+    ulX = 46.000000000000  # lng
+    # ulY = 40.000000000000
+    ulY = 56.000000000000  # lat
+    cols = 16800
+    rows = 6400
+    e = 0.002500000000
+
+    pixel_x = int((lng - ulX) / e)
+    pixel_y = int((lat - ulY) / e)
+    right_x = pixel_x + width / e
+    bottom_y = pixel_y + width / e
+    return dni[pixel_y:bottom_y, pixel_x:right_x]
+
+
+def LA2CM(img_src, cm):
+    cm = mpl.cm.get_cmap(cm)
+    im = np.array(img_src.convert("L"))
+    im = cm(im)
+    im = np.uint8(im * 255)
+    im = Image.fromarray(im)
+    # Now we need to add alpha channel
+    src = np.array(im)
+    src = src[:, :, :3]
+    alpha = np.array(img_src)
+    alpha = alpha[:, :, 1:2]
+    res = np.concatenate((src, alpha), axis=2)
+    ans = Image.fromarray(res)
+    return ans
+
+
+@app.route('/dni/<z>/<x>/<y>.png')
+def dni_tile(z, x, y):
+    z, x, y = int(z), int(x), int(y)
+    color = (0, 0, 0, 0)
+    img = Image.new('RGBA', (256, 256), color)
+
+    if os.path.isfile(f'tiles/dni/{z}/{x}/{y}.png'):
+        img = Image.open(f'tiles/dni/{z}/{x}/{y}.png')
+        img = LA2CM(img, 'plasma')
+    file_object = io.BytesIO()
+    img.save(file_object, 'PNG')
+    # move to beginning of file so `send_file()` it will read from start
+    file_object.seek(0)
+    return send_file(file_object, mimetype='image/PNG')
+
+
+@app.route('/')
+def hello_world():
+    return 'Hello, World!'
