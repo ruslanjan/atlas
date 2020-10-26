@@ -29,6 +29,24 @@ export default new Vuex.Store({
         ...state.location,
         ...location
       }
+    },
+    setElectricity(state, electricity) {
+      state.electricity = {
+        ...state.electricity,
+        ...electricity
+      }
+    },
+    setHeating(state, heating) {
+      state.heating = {
+        ...state.heating,
+        ...heating
+      }
+    },
+    setHotWater(state, hotWater) {
+      state.hotWater = {
+        ...state.hotWater,
+        ...hotWater
+      }
     }
   },
   actions: {
