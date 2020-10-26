@@ -74,8 +74,8 @@ def get_dni(lat, lng):
     (x, y) = world2pixel_yours(float(lat), float(lng))
     if (x, y) == (-1, -1) or np.isnan(dni[x][y]):
         return json.dumps({
-            'isolation': -1
+            'irradiation': -1
         })
     return json.dumps({
-        'isolation': dni[x][y]
+        'irradiation': dni[x][y]
     })
