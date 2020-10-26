@@ -23453,6 +23453,20 @@ video {
   background-color: rgba(250, 221, 149, var(--bg-opacity))
 }
 
+.link {
+  --text-opacity: 1;
+  color: #4299e1;
+  color: rgba(66, 153, 225, var(--text-opacity));
+  cursor: pointer
+}
+
+.link:hover {
+  text-decoration: underline;
+  --text-opacity: 1;
+  color: #90cdf4;
+  color: rgba(144, 205, 244, var(--text-opacity))
+}
+
 @media (min-width: 640px) {
   .sm\:container {
     width: 100%;

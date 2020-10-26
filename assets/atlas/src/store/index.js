@@ -13,14 +13,18 @@ export default new Vuex.Store({
 
     electricity: {
       active: false,
+      offline: false,
+      power_usage: 0, // in kWh in day
     },
 
     heating: {
       active: false,
+      power_usage: 0, // in kWh in day
     },
 
     hotWater: {
       active: false,
+      consumption_per_day: 0, // in m^3 per day
     }
   },
   mutations: {

@@ -2,6 +2,8 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
 import UseCaseSelection from "@/views/UseCaseSelection";
+import ChooseUseCaseAndFillData from "@/views/ChooseUseCaseAndFillData";
+import FillingData from "@/views/FillingData";
 
 Vue.use(VueRouter)
 
@@ -12,9 +14,21 @@ const routes = [
     component: Home
   },
   {
-    path: '/use',
-    name: 'UserCaseSelection',
-    component: UseCaseSelection
+    path: '/use-case',
+    name: 'ChooseUseCaseAndFillData',
+    component: ChooseUseCaseAndFillData,
+    children: [
+      {
+        path: 'fill_data',
+        name: 'FillingData',
+        component: FillingData,
+      },
+      {
+        path: '',
+        name: 'UseCaseSelection',
+        component: UseCaseSelection,
+      },
+    ]
   },
   {
     path: '/about',

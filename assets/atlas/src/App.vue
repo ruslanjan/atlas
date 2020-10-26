@@ -1,5 +1,5 @@
 <template>
-  <div id="app">
+  <div id="app" class="antialiased">
     <transition name="slide-fade" mode="out-in">
       <router-view/>
     </transition>
@@ -7,6 +7,7 @@
 </template>
 
 <style>
+
 #app {
   font-family: 'Roboto', sans-serif;
 }
@@ -84,6 +85,10 @@
   border-radius: 25%;
   /*background-color: #eee;*/
   border: solid 1px #cecece;
+}
+
+.checkmark.radio {
+  border-radius: 50%;
 }
 
 /* On mouse-over, add a grey background color */
