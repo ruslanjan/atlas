@@ -1,11 +1,12 @@
 import io
-
+from flask_cors import CORS, cross_origin
 from flask import Flask, send_file
 import matplotlib.pyplot as plt
 import matplotlib as mpl
 import numpy as np
 from PIL import Image
 import os
+import json
 import matplotlib.image as mpimg
 
 Image.MAX_IMAGE_PIXELS = None
@@ -14,9 +15,10 @@ Image.MAX_IMAGE_PIXELS = None
 dni = np.load('dni.npy', mmap_mode='r')
 
 app = Flask(__name__)
+CORS(app)
 
 
-def world2Pixel_yours(lng, lat):  # x is Longitude and y is Latitude
+def world2pixel_yours(lat, lng):  # x is Longitude and y is Latitude
     # 40 N  46 E
     # lat   lng
     ulX = 46.000000000000  # lng
@@ -26,28 +28,11 @@ def world2Pixel_yours(lng, lat):  # x is Longitude and y is Latitude
     rows = 6400
     e = 0.002500000000
 
-    pixel_x = int((lng - ulX) / e)
-    pixel_y = int((lat - ulY) / e)
-    if pixel_x < 0 or pixel_x > dni.shape[1] or pixel_y < 0 or pixel_y > dni.shape[0]:
+    y = int((lng - ulX) / e)
+    x = int((ulY - lat) / e)
+    if y < 0 or y > dni.shape[1] or x < 0 or x > dni.shape[0]:
         return -1, -1
-    return (pixel_x, pixel_y)
-
-
-def world2Pixel_square(lat, lng, width):  # x is Longitude and y is Latitude
-    # 40 N  46 E
-    # lat   lng
-    ulX = 46.000000000000  # lng
-    # ulY = 40.000000000000
-    ulY = 56.000000000000  # lat
-    cols = 16800
-    rows = 6400
-    e = 0.002500000000
-
-    pixel_x = int((lng - ulX) / e)
-    pixel_y = int((lat - ulY) / e)
-    right_x = pixel_x + width / e
-    bottom_y = pixel_y + width / e
-    return dni[pixel_y:bottom_y, pixel_x:right_x]
+    return (x, y)
 
 
 def LA2CM(img_src, cm):
@@ -67,6 +52,7 @@ def LA2CM(img_src, cm):
 
 
 @app.route('/dni/<z>/<x>/<y>.png')
+@cross_origin()
 def dni_tile(z, x, y):
     z, x, y = int(z), int(x), int(y)
     color = (0, 0, 0, 0)
@@ -82,6 +68,14 @@ def dni_tile(z, x, y):
     return send_file(file_object, mimetype='image/PNG')
 
 
-@app.route('/')
-def hello_world():
-    return 'Hello, World!'
+@app.route('/dni/<lat>/<lng>')
+@cross_origin()
+def get_dni(lat, lng):
+    (x, y) = world2pixel_yours(float(lat), float(lng))
+    if (x, y) == (-1, -1) or np.isnan(dni[x][y]):
+        return json.dumps({
+            'isolation': -1
+        })
+    return json.dumps({
+        'isolation': dni[x][y]
+    })
