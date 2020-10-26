@@ -1,8 +1,27 @@
 <template>
-  <div class="container">
+  <div id="container" class="min-h-screen grid">
+    <div class="md:hidden map-close bg-white p-2 m-2 hover:bg-gray-300 cursor-pointer rounded-lg" @click="showMap=false">
+      <svg height="32px" viewBox="0 0 329.26933 329" xmlns="http://www.w3.org/2000/svg"><path d="m194.800781 164.769531 128.210938-128.214843c8.34375-8.339844 8.34375-21.824219 0-30.164063-8.339844-8.339844-21.824219-8.339844-30.164063 0l-128.214844 128.214844-128.210937-128.214844c-8.34375-8.339844-21.824219-8.339844-30.164063 0-8.34375 8.339844-8.34375 21.824219 0 30.164063l128.210938 128.214843-128.210938 128.214844c-8.34375 8.339844-8.34375 21.824219 0 30.164063 4.15625 4.160156 9.621094 6.25 15.082032 6.25 5.460937 0 10.921875-2.089844 15.082031-6.25l128.210937-128.214844 128.214844 128.214844c4.160156 4.160156 9.621094 6.25 15.082032 6.25 5.460937 0 10.921874-2.089844 15.082031-6.25 8.34375-8.339844 8.34375-21.824219 0-30.164063zm0 0"/></svg>
+    </div>
     <div id="mapContainer"></div>
-    <div id="ui">
-      some text
+    <div id="ui" :class="`bg-white ${!showMap?'':'hidden'} flex flex-col px-8 py-8`">
+      <div class="prose pb-5">
+        <h1>
+          Калькулятор по применению возобновляемой энергии
+        </h1>
+        <p>
+          Узнайте требуемые тип и количество солнечного оборудования для ваших целей
+        </p>
+        <p>
+          Для начала выберите местоположение на карте
+        </p>
+        <p v-if="location.selected_area_name">
+          Выбрано: <strong>{{ location.selected_area_name }}</strong>
+        </p>
+      </div>
+      <a class="text-lg text-blue-500 underline hover:text-blue-300 rounded py-1 md:hidden" @click="showMap=true">Открыть Карту</a>
+      <div class="flex-grow"></div>
+      <button :disabled="!!location.latlng" :class="`${!location.latlng?'bg-brand-400 cursor-not-allowed':'bg-brand-500 hover:bg-brand-400'} px-4 py-2 rounded-lg text-white font-bold text-xl`">Продолжить</button>
     </div>
   </div>
 </template>
@@ -20,8 +39,8 @@ export default {
     return {
       map: null,
       marker: null,
-      latlng: null,
-      irradiation: null
+      showMap: false,
+      mapResizeInterval: null,
     };
   },
   mounted() {
@@ -30,9 +49,19 @@ export default {
       attribution:
           '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
     }).addTo(this.map);
+    this.mapResizeInterval = setInterval(() => {this.map.invalidateSize()}, 400);
     this.map.on('click', async (e) => {
       console.log(e.latlng);
+      let location = {
+        latlng: null,
+        irradiation: null,
+        selected_area_name: null
+      }
       let res = await axios.get(`http://localhost:5000/dni/${e.latlng.lat}/${e.latlng.lng}`)
+      if (res.data.irradiation === -1) {
+        alert("Вы выбрали маркер вне Казахстана")
+        return
+      }
       if (this.marker) {
         this.marker.remove();
       }
@@ -42,13 +71,22 @@ export default {
 
         iconSize: [48, 48], // size of the icon
         iconAnchor: [24, 44], // point of the icon which will correspond to marker's location
-        // popupAnchor: [-3, -76] // point from which the popup should open relative to the iconAnchor
+        popupAnchor: [0, -44] // point from which the popup should open relative to the iconAnchor
       });
       this.marker = L.marker([e.latlng.lat, e.latlng.lng], {icon: icon});
       this.marker.addTo(this.map)
-      this.latlng = e.latlng
-      console.log(res.data)
-      this.irradiation = res.data.irradiation
+      location.latlng = e.latlng
+      location.irradiation = res.data.irradiation
+      res = await axios.get(
+          `https://nominatim.openstreetmap.org/reverse?lat=${e.latlng.lat}&lon=${e.latlng.lng}` +
+          `&format=json`, {
+            headers: {
+              // header1: value,
+            }
+          })
+      location.selected_area_name = res.data.display_name
+      this.marker.bindPopup(`<b>${res.data.display_name}</b>.`).openPopup();
+      this.$store.commit('setLocation', location)
     });
     L.tileLayer("http://localhost:5000/dni/{z}/{x}/{y}.png", {
       tms: true,
@@ -58,9 +96,15 @@ export default {
       maxZoom: 12
     }).addTo(this.map)
   },
+  computed: {
+    location() {
+      return this.$store.state.location
+    }
+  },
   beforeDestroy() {
     if (this.map) {
       this.map.remove();
+      clearInterval(this.mapResizeInterval)
     }
   }
 }
@@ -69,24 +113,35 @@ export default {
 <style scoped>
 #mapContainer {
   height: 100vh;
+  z-index: 1;
 }
 
-.container {
-  display: grid;
+#ui {
+  z-index: 2;
+}
+
+#container {
   grid-template-columns: 2fr 1fr;
 }
-#ui {
-  padding: 12px;
+
+.map-close {
+  z-index: 2;
+  position: absolute;
+  right: 0;
 }
 
-@media only screen and (max-width: 768px) {
+@media only screen and (max-width: 767px) {
   #mapContainer {
-    z-index: -1;
-    position: absolute;
+    position: absolute !important;
     width: 100vw;
   }
-  #ui {
-    z-index: 1;
+
+  #container {
+    grid-template-columns: 1fr;
+  }
+
+  .show-mobile {
+    display: block;
   }
 }
 </style>
