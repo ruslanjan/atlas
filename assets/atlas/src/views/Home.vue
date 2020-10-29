@@ -100,6 +100,7 @@ export default {
           })
       location.selected_area_name = res.data.display_name
       this.$store.commit('setLocation', location)
+      this.marker.bindPopup(`<b>${res.data.display_name}</b>.`).openPopup();
     });
     L.tileLayer("http://localhost:5000/dni/{z}/{x}/{y}.png", {
       tms: true,
