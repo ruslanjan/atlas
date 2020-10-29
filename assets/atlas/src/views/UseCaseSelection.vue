@@ -47,8 +47,8 @@
     <div class="flex-grow"></div>
 
     <div class="flex flex-col align-stretch">
-      <button
-          :class="`btn ${!anyCaseSelected?'btn-disabled':''} hidden md:block`">Рассчитать</button>
+      <component :is="!anyCaseSelected ? 'span' : 'router-link'" :to="{name: 'CalcResult'}"
+              :class="`btn ${!anyCaseSelected?'btn-disabled':''} hidden md:block`">Рассчитать</component>
       <component :is="!anyCaseSelected ? 'span' : 'router-link'" :to="{name: 'FillingData'}"
                  :class="`btn ${!anyCaseSelected?'btn-disabled':''} md:hidden`">Продолжить</component>
     </div>
@@ -98,9 +98,9 @@ export default {
     },
   },
   mounted() {
-    // if (!this.$store.state.location.latlng) {
-    //   this.$router.push("/")
-    // }
+    if (!this.$store.state.location.latlng) {
+      this.$router.push("/")
+    }
   }
 }
 </script>

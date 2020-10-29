@@ -23,7 +23,7 @@
       <input
           :value="electricity.power_usage||''"
           @input="updatePowerUsage"
-          class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+          class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
           id="power_output" type="number" placeholder="Пример: 10">
       <p class="text-sm font-normal pt-2">Не знаете какая мощность вам нужна?
         <span class="link font-bold" @click="showCalculator = !showCalculator">
@@ -31,17 +31,17 @@
         </span>
       </p>
       <div v-if="showCalculator" class="py-2">
-        <calculate-power-usage/>
+        <electricity-usage-calculator/>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import CalculatePowerUsage from "@/components/CalculatePowerUsage";
+import ElectricityUsageCalculator from "@/components/ElectricityUsageCalculator";
 export default {
   name: "FillElectricityData",
-  components: {CalculatePowerUsage},
+  components: {ElectricityUsageCalculator},
   data: () => ({
     showCalculator: false,
   }),

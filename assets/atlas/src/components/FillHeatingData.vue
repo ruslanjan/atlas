@@ -2,7 +2,7 @@
   <div>
     <div class="prose">
       <h2>Поддержка отопления</h2>
-      <h4>Тип отоплительной системы установленный на объекте</h4>
+      <h4>Тип отопительной системы установленный на объекте</h4>
     </div>
     <div class="my-4">
       <label class="checkbox-container">Радиаторы
@@ -29,7 +29,7 @@
       <input
           :value="heating.power_usage||''"
           @input="updatePowerUsage"
-          class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+          class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
           id="power_output_heating" type="number" placeholder="Пример: 10">
     </div>
   </div>

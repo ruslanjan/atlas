@@ -12,7 +12,7 @@ import matplotlib.image as mpimg
 Image.MAX_IMAGE_PIXELS = None
 
 # img = np.loadtxt("DNI.asc", skiprows=6)
-dni = np.load('dni.npy', mmap_mode='r')
+dni = np.load('DNI.npy', mmap_mode='r')
 
 app = Flask(__name__)
 CORS(app)

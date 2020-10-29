@@ -32,6 +32,11 @@ export default {
     'filling-data': FillingData,
     'use-case-selection': UseCaseSelection
   },
+  mounted() {
+    if (!this.$store.state.location.latlng) {
+      this.$router.push("/")
+    }
+  }
 }
 </script>
 

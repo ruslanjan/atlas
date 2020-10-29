@@ -12,6 +12,7 @@
     "@tailwindcss/typography": "^0.2.0",
     "axios": "^0.20.0",
     "core-js": "^3.6.5",
+    "html2pdf.js": "^0.9.2",
     "leaflet": "^1.7.1",
     "normalize.css": "^8.0.1",
     "tailwindcss": "^1.9.5",

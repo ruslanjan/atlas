@@ -19,7 +19,7 @@
         </div>
         <span class="px-2">Назад</span>
       </router-link>
-      <div class="text-lg py-1 text-white">Ruslan Jankurazov</div>
+      <div class="text-lg py-1 text-white hidden md:block">Ruslan Jankurazov</div>
       <router-link
           class="md:hidden text-lg text-blue-500 hover:underline cursor-pointer hover:text-blue-300 rounded py-1"
           :to="{name: 'Home'}">В начало
@@ -35,6 +35,11 @@
       <div v-if="hotWater.active">
         <fill-hot-water-data/>
       </div>
+    </div>
+    <div class="flex-grow"></div>
+    <div class="flex flex-col align-stretch">
+      <router-link :to="{name: 'CalcResult'}"
+                   class="btn block md:hidden">Рассчитать</router-link>
     </div>
   </div>
 </template>
@@ -67,6 +72,11 @@ export default {
       return this.$store.state.hotWater;
     }
   },
+  mounted() {
+    if (!this.anyCaseSelected()) {
+      this.$router.push("/")
+    }
+  }
 }
 </script>
 
