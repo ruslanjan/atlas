@@ -12,7 +12,7 @@ import matplotlib.image as mpimg
 Image.MAX_IMAGE_PIXELS = None
 
 # img = np.loadtxt("DNI.asc", skiprows=6)
-dni = np.load('DNI.npy', mmap_mode='r')
+dni = np.load('./atlas/DNI.npy', mmap_mode='r')
 
 app = Flask(__name__)
 CORS(app)
@@ -79,3 +79,7 @@ def get_dni(lat, lng):
     return json.dumps({
         'irradiation': dni[x][y]
     })
+
+
+if __name__ == "__main__":
+    app.run(host='0.0.0.0')

@@ -1,0 +1,1 @@
+export const host = ('http://82.200.154.74:5000' && false) || 'http://localhost:5000'

@@ -30,6 +30,7 @@
 <script>
 import L from 'leaflet'
 import axios from 'axios'
+import {host} from "@/api";
 
 export default {
   name: 'Home',
@@ -71,7 +72,7 @@ export default {
         irradiation: null,
         selected_area_name: null
       }
-      let res = await axios.get(`http://localhost:5000/dni/${e.latlng.lat}/${e.latlng.lng}`)
+      let res = await axios.get(`${host}/dni/${e.latlng.lat}/${e.latlng.lng}`)
       if (res.data.irradiation === -1) {
         alert("Вы выбрали маркер вне Казахстана")
         return
@@ -102,7 +103,7 @@ export default {
       this.$store.commit('setLocation', location)
       this.marker.bindPopup(`<b>${res.data.display_name}</b>.`).openPopup();
     });
-    L.tileLayer("http://localhost:5000/dni/{z}/{x}/{y}.png", {
+    L.tileLayer(host + "/dni/{z}/{x}/{y}.png", {
       tms: true,
       opacity: 0.7,
       attribution: "",

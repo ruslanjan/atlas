@@ -150,6 +150,7 @@
 <script>
 import L from "leaflet";
 import html2pdf from "html2pdf.js";
+import {host} from "@/api";
 
 // Energy conversion efficiency
 const ENERGY_CONVERSION_EFFICIENCY_OF_SOLAR_PANEL = 0.25;
@@ -268,7 +269,7 @@ export default {
       attribution:
           '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
     }).addTo(this.map);
-    L.tileLayer("http://localhost:5000/dni/{z}/{x}/{y}.png", {
+    L.tileLayer(host + "/dni/{z}/{x}/{y}.png", {
       tms: true,
       opacity: 0.7,
       attribution: "",
