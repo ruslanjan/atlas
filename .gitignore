@@ -11,3 +11,5 @@ Kazakhstan_GISdata_LTAym_YearlyMonthlyTotals_AAIGRID.zip
 Kazakhstan_GISdata_LTAym_YearlyMonthlyTotals_GEOTIFF.zip
 .DS_Store
 .pyc
+__pycache__/
+atlas/__pycache__/
