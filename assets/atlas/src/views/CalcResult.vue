@@ -236,7 +236,14 @@ export default {
       res.estimated_cost = res.solar_collector_area * SOLAR_COLLECTOR_PRICE_PER_METER_SQUARED;
       res.CO2_reduced = res.need_energy * CO2_TONS_PER_KWH;
       return res;
-    }
+    },
+    anyCaseSelected() {
+      return (
+          this.electricity.active ||
+          this.heating.active ||
+          this.hotWater.active
+      )
+    },
   },
   computed: {
     electricity() {
@@ -253,17 +260,10 @@ export default {
 
     location() {
       return this.$store.state.location
-    },
-    anyCaseSelected() {
-      return (
-          this.electricity.active ||
-          this.heating.active ||
-          this.hotWater.active
-      )
-    },
+    }
   },
   mounted() {
-    if (!this.$store.state.location.latlng && !this.anyCaseSelected) {
+    if (!this.$store.state.location.latlng && !this.anyCaseSelected()) {
       this.$router.push("/")
       return;
     }

@@ -54,7 +54,7 @@ import FillHotWaterData from "@/components/FillHotWaterData";
 export default {
   name: "FillingData",
   components: {FillHotWaterData, FillHeatingData, FillElectricityData},
-  computed: {
+  methods: {
     anyCaseSelected() {
       return (
           this.electricity.active ||
@@ -62,6 +62,8 @@ export default {
           this.hotWater.active
       )
     },
+  },
+  computed: {
     electricity() {
       return this.$store.state.electricity;
     },
