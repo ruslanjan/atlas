@@ -58,8 +58,8 @@ def dni_tile(z, x, y):
     color = (0, 0, 0, 0)
     img = Image.new('RGBA', (256, 256), color)
 
-    if os.path.isfile(f'tiles/dni/{z}/{x}/{y}.png'):
-        img = Image.open(f'tiles/dni/{z}/{x}/{y}.png')
+    if os.path.isfile(f'./atlas/tiles/dni/{z}/{x}/{y}.png'):
+        img = Image.open(f'./atlas/tiles/dni/{z}/{x}/{y}.png')
         img = LA2CM(img, 'plasma')
     file_object = io.BytesIO()
     img.save(file_object, 'PNG')

@@ -70,6 +70,9 @@ export default {
     estimated: 0,
     counter: 0,
     devices_select: {
+      "Душ": 40,
+      "Ванна": 60,
+      "Рукомойник": 10,
     }
   }),
   methods: {
