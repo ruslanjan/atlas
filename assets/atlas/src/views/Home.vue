@@ -129,6 +129,7 @@ export default {
 #mapContainer {
   height: 100vh;
   z-index: 1;
+  cursor: pointer;
 }
 
 #ui {

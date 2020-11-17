@@ -30,8 +30,8 @@
             <div class="flex items-center">
               <img src="icons/bolt.svg" class="h-8 pr-3" alt="">
               <div>
-                Требуемая мощность системы ~ {{ calculateElectricity().need_energy.toFixed(2) }} кВт⋅ч <small>в
-                год</small>
+                Требуемая мощность системы ~ {{ calculateElectricity().need_energy.toFixed(2) }} кВт⋅ч в
+                год
               </div>
             </div>
             <div class="flex items-center">
@@ -43,13 +43,13 @@
             <div class="flex items-center">
               <img src="icons/tenge.svg" class="h-8 pr-3" alt="Стоимость">
               <div>
-                Приблизительная стоимость оборудования ~ {{ calculateElectricity().estimated_cost.toFixed(2) }} тг
+                Приблизительная стоимость оборудования ~ {{ calculateElectricity().estimated_cost.toFixed(0) }} тг
               </div>
             </div>
             <div class="flex items-center">
               <img src="icons/leaf.svg" class="h-8 pr-3" alt="">
               <div>
-                Сокращение выбросов CO2 ~ {{ (calculateElectricity().CO2_reduced / 1000000).toFixed(2) }} млн т/год
+                Сокращение выбросов CO2 ~ {{ (calculateElectricity().CO2_reduced).toFixed(2) }} т/год
               </div>
             </div>
           </div>
@@ -68,8 +68,8 @@
             <div class="flex items-center">
               <img src="icons/bolt.svg" class="h-8 pr-3" alt="">
               <div>
-                Отопительная мощность системы ~ {{ calculateHeating().need_energy.toFixed(2) }} кВт⋅ч <small>в
-                год</small>
+                Отопительная мощность системы ~ {{ calculateHeating().need_energy.toFixed(2) }} кВт⋅ч в
+                год
               </div>
             </div>
             <div class="flex items-center">
@@ -81,13 +81,13 @@
             <div class="flex items-center">
               <img src="icons/tenge.svg" class="h-8 pr-3" alt="Стоимость">
               <div>
-                Приблизительная стоимость оборудования ~ {{ calculateHeating().estimated_cost.toFixed(2) }} тг
+                Приблизительная стоимость оборудования ~ {{ calculateHeating().estimated_cost.toFixed(0) }} тг
               </div>
             </div>
             <div class="flex items-center">
               <img src="icons/leaf.svg" class="h-8 pr-3" alt="">
               <div>
-                Сокращение выбросов CO2 ~ {{ (calculateHeating().CO2_reduced / 1000000).toFixed(2) }} млн т/год
+                Сокращение выбросов CO2 ~ {{ (calculateHeating().CO2_reduced).toFixed(2) }} т/год
               </div>
             </div>
           </div>
@@ -118,13 +118,13 @@
             <div class="flex items-center">
               <img src="icons/tenge.svg" class="h-8 pr-3" alt="Стоимость">
               <div>
-                Приблизительная стоимость оборудования ~ {{ calculateHotWater().estimated_cost.toFixed(2) }} тг
+                Приблизительная стоимость оборудования ~ {{ calculateHotWater().estimated_cost.toFixed(0) }} тг
               </div>
             </div>
             <div class="flex items-center">
               <img src="icons/leaf.svg" class="h-8 pr-3" alt="">
               <div>
-                Сокращение выбросов CO2 ~ {{ (calculateHotWater().CO2_reduced / 1000000).toFixed(2) }} млн т/год
+                Сокращение выбросов CO2 ~ {{ (calculateHotWater().CO2_reduced).toFixed(2) }} т/год
               </div>
             </div>
           </div>
@@ -156,7 +156,7 @@ import {host} from "@/api";
 const ENERGY_CONVERSION_EFFICIENCY_OF_SOLAR_PANEL = 0.25;
 const ENERGY_CONVERSION_EFFICIENCY_OF_SOLAR_COLLECTOR = 0.60;
 // // CO2 Coefficient
-const CO2_TONS_PER_KWH = 0.919 * 1000 // in tons of CO2 per kWh
+const CO2_TONS_PER_KWH = 0.919 / 1000 // in tons of CO2 per kWh
 // // Price per m^2
 const SOLAR_PANEL_PRICE_PER_METER_SQUARED = 90000; // to be discussed
 const SOLAR_COLLECTOR_PRICE_PER_METER_SQUARED = 100000; //
@@ -196,6 +196,9 @@ export default {
           (this.location.irradiation * ENERGY_CONVERSION_EFFICIENCY_OF_SOLAR_PANEL);
       res.estimated_cost = res.solar_panel_area * SOLAR_PANEL_PRICE_PER_METER_SQUARED;
       res.CO2_reduced = res.need_energy * CO2_TONS_PER_KWH;
+      if (this.electricity.offline) {
+        res.estimated_cost *= 2;
+      }
       return res;
     },
     calculateHeating() {

@@ -29,9 +29,11 @@
       <div v-if="electricity.active">
         <fill-electricity-data/>
       </div>
+      <hr/>
       <div v-if="heating.active">
         <fill-heating-data/>
       </div>
+      <hr/>
       <div v-if="hotWater.active">
         <fill-hot-water-data/>
       </div>
