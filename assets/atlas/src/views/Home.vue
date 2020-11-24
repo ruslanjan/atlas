@@ -1,7 +1,11 @@
 <template>
   <div id="container" class="h-screen grid">
-    <div class="md:hidden map-close bg-white p-2 m-2 hover:bg-gray-300 cursor-pointer rounded-lg" @click="showMap=false">
-      <svg height="32px" viewBox="0 0 329.26933 329" xmlns="http://www.w3.org/2000/svg"><path d="m194.800781 164.769531 128.210938-128.214843c8.34375-8.339844 8.34375-21.824219 0-30.164063-8.339844-8.339844-21.824219-8.339844-30.164063 0l-128.214844 128.214844-128.210937-128.214844c-8.34375-8.339844-21.824219-8.339844-30.164063 0-8.34375 8.339844-8.34375 21.824219 0 30.164063l128.210938 128.214843-128.210938 128.214844c-8.34375 8.339844-8.34375 21.824219 0 30.164063 4.15625 4.160156 9.621094 6.25 15.082032 6.25 5.460937 0 10.921875-2.089844 15.082031-6.25l128.210937-128.214844 128.214844 128.214844c4.160156 4.160156 9.621094 6.25 15.082032 6.25 5.460937 0 10.921874-2.089844 15.082031-6.25 8.34375-8.339844 8.34375-21.824219 0-30.164063zm0 0"/></svg>
+    <div class="md:hidden map-close bg-white p-2 m-2 hover:bg-gray-300 cursor-pointer rounded-lg"
+         @click="showMap=false">
+      <svg height="32px" viewBox="0 0 329.26933 329" xmlns="http://www.w3.org/2000/svg">
+        <path
+            d="m194.800781 164.769531 128.210938-128.214843c8.34375-8.339844 8.34375-21.824219 0-30.164063-8.339844-8.339844-21.824219-8.339844-30.164063 0l-128.214844 128.214844-128.210937-128.214844c-8.34375-8.339844-21.824219-8.339844-30.164063 0-8.34375 8.339844-8.34375 21.824219 0 30.164063l128.210938 128.214843-128.210938 128.214844c-8.34375 8.339844-8.34375 21.824219 0 30.164063 4.15625 4.160156 9.621094 6.25 15.082032 6.25 5.460937 0 10.921875-2.089844 15.082031-6.25l128.210937-128.214844 128.214844 128.214844c4.160156 4.160156 9.621094 6.25 15.082032 6.25 5.460937 0 10.921874-2.089844 15.082031-6.25 8.34375-8.339844 8.34375-21.824219 0-30.164063zm0 0"/>
+      </svg>
     </div>
     <div id="ui" :class="`bg-white ${!showMap?'flex':'hidden'} md:flex flex-col px-6 py-12 overflow-y-scroll`">
       <div class="prose pb-5">
@@ -18,10 +22,22 @@
           Выбрано: <strong>{{ location.selected_area_name }}</strong>
         </p>
       </div>
-      <a class="text-lg text-blue-500 cursor-pointer underline hover:text-blue-300 rounded py-1 md:hidden" @click="showMap=true">Открыть Карту</a>
+      <a class="text-lg text-blue-500 cursor-pointer underline hover:text-blue-300 rounded py-1 md:hidden"
+         @click="showMap=true">Открыть Карту</a>
       <div class="flex-grow"></div>
       <component :is="!location.latlng ? 'span' : 'router-link'" :to="{name: 'UseCaseSelection'}"
-                   :class="`btn ${!location.latlng?'btn-disabled':''}`">Продолжить</component>
+                 :class="`btn ${!location.latlng?'btn-disabled':''}`">Продолжить
+      </component>
+      <button class="btn btn-primary mt-5" @click="want_dick=!want_dick">
+        Хотите встроить на свой сайт?
+      </button>
+      <div v-if="want_dick" class="prose">
+        <h4 class="pt-5">
+          Скопируйте код ниже на ваш сайт:
+        </h4>
+        <pre>&lt;iframe src="{{ host }}" height="600" width="500">
+&lt;/iframe></pre>
+      </div>
     </div>
     <div id="mapContainer"></div>
   </div>
@@ -43,6 +59,7 @@ export default {
       marker: null,
       showMap: false,
       mapResizeInterval: null,
+      want_dick: false,
     };
   },
   mounted() {
@@ -51,7 +68,9 @@ export default {
       attribution:
           '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
     }).addTo(this.map);
-    this.mapResizeInterval = setInterval(() => {this.map.invalidateSize()}, 400);
+    this.mapResizeInterval = setInterval(() => {
+      this.map.invalidateSize()
+    }, 400);
     if (this.location.latlng) {
       let icon = L.icon({
         iconUrl: 'icons/marker.png',
@@ -114,6 +133,9 @@ export default {
   computed: {
     location() {
       return this.$store.state.location
+    },
+    host() {
+      return host;
     }
   },
   beforeDestroy() {

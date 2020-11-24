@@ -18,16 +18,16 @@
     </div>
     <div class="pt-8 mb-6">
       <label class="block text-xl mb-2" for="power_output">
-        Желаемая мощность (в кВт⋅ч в день)
+        Желаемая выработка энергии (в кВт⋅ч в день)
       </label>
       <input
           :value="electricity.power_usage||''"
           @input="updatePowerUsage"
           class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
           id="power_output" type="number" placeholder="Пример: 10">
-      <p class="text-sm font-normal pt-2">Не знаете какая мощность вам нужна?
+      <p class="text-sm font-normal pt-2">Не знаете сколько энергии вам нужно?
         <span class="link font-bold" @click="showCalculator = !showCalculator">
-          {{!showCalculator?'Узнать мощность':'Скрыть'}}
+          {{!showCalculator?'Узнать расход энергии':'Скрыть'}}
         </span>
       </p>
       <div v-if="showCalculator" class="py-2">
