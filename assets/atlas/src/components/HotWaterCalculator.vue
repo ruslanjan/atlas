@@ -2,11 +2,11 @@
   <div>
     <div class="text-lg font-bold">Узнать расход горячей воды</div>
     <div class="text-sm text-gray-600 italic">Информация ниже носит справочный характер</div>
-    <div v-for="(item, index) in items" :key="item.id" class="grid grid-cols-2 md:grid-cols-7 gap-2">
-      <div class="pt-8 md:pt-8 col-span-2 md:col-span-3">
+    <div v-for="(item, index) in items" :key="item.id" class="grid grid-cols-2 lg:grid-cols-7 gap-2">
+      <div class="pt-8 lg:pt-8 col-span-2 lg:col-span-3">
         <label class="block text-lg mb-2"
                :for="`name_${item.id}`">
-          Прибор {{index + 1}}:
+          Прибор {{ index + 1 }}:
         </label>
         <div class="relative">
           <select
@@ -24,7 +24,7 @@
           </div>
         </div>
       </div>
-      <div class="pt-3 md:pt-8 md:col-span-2">
+      <div class="pt-3 lg:pt-8 lg:col-span-2">
         <label class="block text-lg mb-2" :for="`consuming_${item.id}`">
           Количество:
         </label>
@@ -33,23 +33,25 @@
                @click="() => {if (item.count>0) {item.count -= 1}}">
             <span class="text-3xl font-medium block text-gray-700">-</span>
           </div>
-          <input
-              class="appearance-none block text-center w-full border-t border-b py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-              :id="`consuming_${item.id}`" v-model.number="item.count" type="number" placeholder="Пример: 10">
+          <div>
+            <input
+                class="appearance-none block text-center w-full border-t border-b py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                :id="`consuming_${item.id}`" v-model.number="item.count" type="number" placeholder="Пример: 10">
+          </div>
           <div class="flex flex-col justify-center px-3 border rounded-r cursor-pointer hover:bg-gray-200 select-none"
                @click="() => {item.count += 1}">
             <span class="text-2xl font-normal block text-gray-700">+</span>
           </div>
         </div>
       </div>
-      <div class="pt-3 md:pt-8 md:col-span-2">
+      <div class="pt-3 lg:pt-8 lg:col-span-2">
         <label class="block text-lg mb-2" :for="`consuming_${item.id}`">
           Расход:
         </label>
         <div class="consume">
           <input
-            class="appearance-none block w-full border rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-            :id="`consuming_${item.id}`" v-model.number="item.consume" type="number" placeholder="Пример: 10">
+              class="appearance-none block w-full border rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+              :id="`consuming_${item.id}`" v-model.number="item.consume" type="number" placeholder="Пример: 10">
         </div>
       </div>
     </div>
@@ -119,7 +121,14 @@ export default {
     }
   },
   mounted() {
-    this.addItem();
+    if (this.$store.state.hotWater.calculator_state) {
+      Object.assign(this.$data, this.$store.state.hotWater.calculator_state);
+    } else {
+      this.addItem();
+    }
+  },
+  beforeDestroy() {
+    this.$store.commit('setHotWaterCalculatorState', this.$data)
   }
 }
 </script>
