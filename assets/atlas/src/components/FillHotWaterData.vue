@@ -35,7 +35,7 @@ export default {
   methods: {
     updateConsumption(e) { // in m^3 per day. Input is in liters, but we will convert that to m^3 anyway.
       this.$store.commit('setHotWater', {
-        consumption_per_day: parseInt(e.target.value||0)/1000
+        consumption_per_day: parseFloat(e.target.value||0)/1000
       })
     },
     // toggleOffline() {

@@ -1,6 +1,7 @@
 <template>
   <div>
     <div class="text-lg font-bold">Узнать расход энергии</div>
+    <div class="text-sm text-gray-600 italic">Информация ниже носит справочный характер</div>
     <div v-for="(item, index) in items" :key="item.id" class="grid grid-cols-2 md:grid-cols-7 gap-2">
       <div class="pt-8 md:pt-8 col-span-2 md:col-span-3">
         <label class="block text-lg mb-2"
@@ -57,7 +58,7 @@
         <div class="text-2xl font-medium">+</div>
         <div class="pl-2">Добавить ещё прибор</div>
       </div>
-      <div>Итого: {{ estimated }} кВтч</div>
+      <div>Итого: {{ estimated.toFixed(2) }} кВтч</div>
     </div>
   </div>
 </template>

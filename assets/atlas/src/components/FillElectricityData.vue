@@ -48,7 +48,7 @@ export default {
   methods: {
     updatePowerUsage(e) { // in
       this.$store.commit('setElectricity', {
-        power_usage: parseInt(e.target.value||0)
+        power_usage: parseFloat(e.target.value||0)
       })
     },
     toggleOffline() {

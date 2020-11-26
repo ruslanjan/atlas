@@ -41,7 +41,7 @@ export default {
   methods: {
     updatePowerUsage(e) { // in
       this.$store.commit('setHeating', {
-        power_usage: parseInt(e.target.value||0)
+        power_usage: parseFloat(e.target.value||0)
       })
     },
     // toggleOffline() {

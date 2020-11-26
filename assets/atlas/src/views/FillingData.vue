@@ -28,12 +28,12 @@
     <div class="py-12 flex flex-col gap-4">
       <div v-if="electricity.active">
         <fill-electricity-data/>
+        <hr/>
       </div>
-      <hr/>
       <div v-if="heating.active">
         <fill-heating-data/>
+        <hr/>
       </div>
-      <hr/>
       <div v-if="hotWater.active">
         <fill-hot-water-data/>
       </div>
@@ -77,8 +77,8 @@ export default {
     }
   },
   mounted() {
-    if (!this.anyCaseSelected()) {
-      this.$router.push("/")
+    if (!this.anyCaseSelected() && this.$route.name === 'FillingData') {
+      this.$router.push("/") // fix this bug
     }
   }
 }
