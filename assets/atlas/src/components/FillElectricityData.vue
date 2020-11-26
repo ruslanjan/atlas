@@ -49,12 +49,12 @@ export default {
     updatePowerUsage(e) { // in
       this.$store.commit('setElectricity', {
         power_usage: parseFloat(e.target.value||0)
-      })
+      });
     },
     toggleOffline() {
       this.$store.commit('setElectricity', {
         offline: !this.electricity.offline
-      })
+      });
     }
   },
   computed: {
