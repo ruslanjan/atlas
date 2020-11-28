@@ -6,9 +6,12 @@
     </div>
     <div class="my-4">
       <label class="checkbox-container">Радиаторы
-        <input type="checkbox">
+        <input type="checkbox" v-model="is_using_radiator">
         <span class="checkmark"></span>
       </label>
+      <div v-if="is_using_radiator" class="text-gray-600 italic">
+        Использование солнечных коллекторов не эффективно с радиаторами для отопления
+      </div>
     </div>
     <div class="my-4">
       <label class="checkbox-container">Тёплые полы
@@ -24,7 +27,7 @@
     </div>
     <div class="pt-8 mb-6">
       <label class="block text-xl mb-2" for="power_output_heating">
-        Желаемая мощность (в кВт⋅ч в день)
+        Желаемая выработка системы (в кВт⋅ч в день)
       </label>
       <input
           :value="heating.power_usage||''"
@@ -38,6 +41,9 @@
 <script>
 export default {
   name: "FillHeatingData",
+  data: () => ({
+    is_using_radiator: false,
+  }),
   methods: {
     updatePowerUsage(e) { // in
       this.$store.commit('setHeating', {

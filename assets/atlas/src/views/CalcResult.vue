@@ -4,7 +4,7 @@
       <div class="flex justify-between align-center">
         <router-link :to="{name: 'FillingData'}"
                      class="text-lg flex align-stretch text-blue-500 hover:underline cursor-pointer hover:text-blue-300 rounded py-1">
-          <div class="flex flex-col justify-center">
+          <div class="inline-flex flex-col justify-center">
             <div class="h-5 fill-current">
               <svg viewBox="0 0 512 512" xml:space="preserve" height="100%">
               <g>
@@ -30,7 +30,7 @@
             <div class="flex items-center">
               <img src="icons/bolt.svg" class="h-8 pr-3" alt="">
               <div>
-                Требуемая мощность системы ~ {{ calculateElectricity().need_energy.toFixed(2) }} кВт⋅ч в
+                Годовая выработка системы ~ {{ calculateElectricity().need_energy.toFixed(2) }} кВт⋅ч в
                 год
               </div>
             </div>
@@ -68,7 +68,7 @@
             <div class="flex items-center">
               <img src="icons/bolt.svg" class="h-8 pr-3" alt="">
               <div>
-                Отопительная мощность системы ~ {{ calculateHeating().need_energy.toFixed(2) }} кВт⋅ч в
+                Отопительная выработка системы ~ {{ calculateHeating().need_energy.toFixed(2) }} кВт⋅ч в
                 год
               </div>
             </div>
@@ -104,9 +104,15 @@
           <div class="text-2xl font-medium">Горячее водоснабжение</div>
           <div class="flex flex-col gap-3 py-3">
             <div class="flex items-center">
-              <img src="icons/bolt.svg" class="h-8 pr-3" alt="">
+              <img src="icons/tap-water.svg" class="h-8 pr-3" alt="">
               <div>
                 Расход горячей воды ~ {{ (hotWater.consumption_per_day * 1000).toFixed(2) }} л/сут
+              </div>
+            </div>
+            <div class="flex items-center">
+              <img src="icons/bolt.svg" class="h-8 pr-3" alt="">
+              <div>
+                Эквивалент годовой экономии электроэнергии ~ {{ calculateHotWater().need_energy.toFixed(2) }} л/сут
               </div>
             </div>
             <div class="flex items-center">
@@ -137,7 +143,7 @@
           </div>
         </div>
       </div>
-      <div class="flex flex-col align-stretch gap-4 pt-6">
+      <div class="grid grid-cols-1 gap-4 pt-6">
         <button class="btn" @click="makePdf">Скачать результат</button>
         <button class="btn" @click="resetStateAndGoHome">Начать с начала
         </button>

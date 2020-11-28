@@ -60,7 +60,7 @@
         <div class="text-2xl font-medium">+</div>
         <div class="pl-2">Добавить ещё прибор</div>
       </div>
-      <div>Итого: {{ estimated }} л/сут</div>
+      <div>Итого: {{ estimated }} литров в сутки</div>
     </div>
   </div>
 </template>
@@ -166,6 +166,6 @@ export default {
 }
 
 .consume::after {
-  content: "л/с";
+  content: "л/сут";
 }
 </style>

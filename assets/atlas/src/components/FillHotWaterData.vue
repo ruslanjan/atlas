@@ -12,7 +12,7 @@
           @input="updateConsumption"
           class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
           id="power_output_heating" type="number" placeholder="Расход горячей воды в сутки">
-      <p class="text-sm font-normal pt-2">Не знаете какая мощность вам нужна?
+      <p class="text-sm font-normal pt-2">Не знаете какая выработка системы вам нужна?
         <span class="link font-bold" @click="showCalculator = !showCalculator">
           {{!showCalculator?'Узнать':'Скрыть'}}
         </span>
