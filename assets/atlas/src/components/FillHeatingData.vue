@@ -28,8 +28,11 @@
     <div class="pt-8 mb-6">
       <label class="block text-xl mb-2" for="power_output_heating">
         Желаемая дневная выработка системы (кВт⋅ч)
-        <button class="text-gray-600 font-medium cursor-pointer" v-tippy
-              content="В среднем, для отопления дома нужен 1 кВт⋅ч на 10 м^2">?</button>
+        <button
+            class="text-gray-600 font-medium rounded-full border border-gray-600 hover:bg-gray-300 text-lg cursor-pointer inline-block"
+            style="vertical-align: super; width: 1.5em" v-tippy
+            content="В среднем, для отопления дома нужен 1 кВт⋅ч на 10 м^2">?
+        </button>
       </label>
       <input
           :value="heating.power_usage||''"
@@ -49,7 +52,7 @@ export default {
   methods: {
     updatePowerUsage(e) { // in
       this.$store.commit('setHeating', {
-        power_usage: parseFloat(e.target.value||0)
+        power_usage: parseFloat(e.target.value || 0)
       })
     },
     // toggleOffline() {

@@ -1,7 +1,7 @@
 <template>
   <div class="grid h-screen grid-cols-1 md:grid-cols-8">
     <div class="flex flex-col overflow-y-scroll py-12 px-6 col-span-3">
-      <div class="flex justify-between align-center">
+      <div class="flex justify-between align-center" style="flex-shrink: 0">
         <router-link :to="{name: 'FillingData'}"
                      class="text-lg flex align-stretch text-blue-500 hover:underline cursor-pointer hover:text-blue-300 rounded py-1">
           <div class="inline-flex flex-col justify-center">

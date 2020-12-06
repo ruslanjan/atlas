@@ -3,8 +3,12 @@
     <div class="prose">
       <h2>Горячее водоснабжение</h2>
       <h4>Приблизительный расход горячей воды в литрах в сутки
-      <button class="text-gray-600 font-medium cursor-pointer" v-tippy
-              content="Вы можете подсчитать расход воды используя мини-калькулятор ниже">?</button></h4>
+        <button
+            class="text-gray-600 font-medium rounded-full border border-gray-600 hover:bg-gray-300 text-lg cursor-pointer inline-block"
+            style="vertical-align: super; width: 1.5em" v-tippy
+            content="Вы можете подсчитать расход воды используя мини-калькулятор ниже">?
+        </button>
+      </h4>
     </div>
     <div class="pt-8 mb-6">
       <label class="block text-xl mb-2" for="power_output_heating">

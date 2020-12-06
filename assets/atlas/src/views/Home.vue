@@ -8,15 +8,17 @@
       </svg>
     </div>
     <div id="ui" :class="`bg-white ${!showMap?'flex':'hidden'} md:flex flex-col px-6 py-12 overflow-y-scroll`">
-      <div class="flex">
-        <img src="logos/gef.png" class="h-8 pr-3" alt="">
-        <img src="logos/kz.jpg" class="h-8 pr-3" alt="">
-        <img src="logos/undp.png" class="h-8 pr-3" alt="">
+      <div class="flex justify-center gap-4 pb-4">
+        <img src="logos/gef.png" class="h-12 pr-3" alt="">
+        <img src="logos/kz.jpg" class="h-12 pr-3" alt="">
+        <img src="logos/undp.png" class="h-12 pr-3" alt="">
       </div>
       <div class="prose pb-5">
         <h2>
-          Калькулятор солнечных источников энергии <span id="manual"
-                                                         class="text-gray-600 font-medium cursor-pointer">?</span>
+          Калькулятор солнечных источников энергии
+          <button id="manual" class="text-gray-600 font-medium rounded-full border border-gray-600 hover:bg-gray-300 text-lg cursor-pointer inline-block"
+                  style="vertical-align: super; width: 1.5em">?
+          </button>
         </h2>
         <tippy toSelector="#manual">
           Данный калькулятор позволит вам снизить риски при инвестиции в солнечную энергетику. Калькулятор поможет
@@ -97,8 +99,8 @@ export default {
   },
   methods: {
     openMap() {
-      window.scrollTo(0,0);
-      this.showMap=true
+      window.scrollTo(0, 0);
+      this.showMap = true
     },
     async searchArea() {
       let res = await axios.get(
@@ -122,7 +124,7 @@ export default {
       }
       console.log(res);
     },
-    zoomOnPosition(latlng){
+    zoomOnPosition(latlng) {
       this.map.setView(latlng, 9);
     },
     async onPositionSelected(latlng) {
