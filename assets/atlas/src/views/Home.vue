@@ -1,5 +1,5 @@
 <template>
-  <div id="container" class="h-screen grid">
+  <div id="container" class="min-h-screen grid">
     <div class="md:hidden map-close bg-white p-2 m-2 hover:bg-gray-300 cursor-pointer rounded-lg"
          @click="showMap=false">
       <svg height="32px" viewBox="0 0 329.26933 329" xmlns="http://www.w3.org/2000/svg">
@@ -51,7 +51,7 @@
         <button class="btn" @click="searchArea" :disabled="loading">Найти</button>
       </div>
       <a class="text-lg text-blue-500 cursor-pointer underline hover:text-blue-300 rounded py-1 md:hidden"
-         @click="showMap=true">Открыть Карту</a>
+         @click="openMap">Открыть Карту</a>
       <div class="flex-grow"></div>
       <component :is="!location.latlng ? 'span' : 'router-link'" :to="{name: 'UseCaseSelection'}"
                  :class="`btn ${!location.latlng?'btn-disabled':''}`">Продолжить
@@ -96,6 +96,10 @@ export default {
     };
   },
   methods: {
+    openMap() {
+      window.scrollTo(0,0);
+      this.showMap=true
+    },
     async searchArea() {
       let res = await axios.get(
           `https://nominatim.openstreetmap.org/search/${encodeURI(this.searchText)}?countrycodes=KZ` +

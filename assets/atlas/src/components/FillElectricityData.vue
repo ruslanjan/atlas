@@ -19,8 +19,8 @@
     <div class="pt-8 mb-6">
       <label class="block text-xl mb-2" for="power_output">
         Желаемая дневная выработка энергии (кВт⋅ч)
-        <span class="text-gray-600 font-medium cursor-pointer" v-tippy
-              content="Вы можете подсчитать ваш расход электроэнергии используя мини-калькулятор ниже">?</span>
+        <button class="text-gray-600 font-medium cursor-pointer" v-tippy
+              content="Вы можете подсчитать ваш расход электроэнергии используя мини-калькулятор ниже">?</button>
       </label>
       <input
           :value="electricity.power_usage||''"

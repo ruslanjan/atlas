@@ -3,8 +3,8 @@
     <div class="prose">
       <h2>Горячее водоснабжение</h2>
       <h4>Приблизительный расход горячей воды в литрах в сутки
-      <span class="text-gray-600 font-medium cursor-pointer" v-tippy
-              content="Вы можете подсчитать расход воды используя мини-калькулятор ниже">?</span></h4>
+      <button class="text-gray-600 font-medium cursor-pointer" v-tippy
+              content="Вы можете подсчитать расход воды используя мини-калькулятор ниже">?</button></h4>
     </div>
     <div class="pt-8 mb-6">
       <label class="block text-xl mb-2" for="power_output_heating">
@@ -16,7 +16,7 @@
           id="power_output_heating" type="number" placeholder="Расход горячей воды в сутки">
       <p class="text-sm font-normal pt-2">Не знаете какая выработка системы вам нужна?
         <span class="link font-bold" @click="showCalculator = !showCalculator">
-          {{!showCalculator?'Узнать':'Скрыть'}}
+          {{ !showCalculator ? 'Узнать' : 'Скрыть' }}
         </span>
       </p>
       <div v-if="showCalculator" class="py-2">
@@ -28,6 +28,7 @@
 
 <script>
 import HotWaterCalculator from "@/components/HotWaterCalculator";
+
 export default {
   name: "FillHotWaterData",
   components: {HotWaterCalculator},
@@ -37,7 +38,7 @@ export default {
   methods: {
     updateConsumption(e) { // in m^3 per day. Input is in liters, but we will convert that to m^3 anyway.
       this.$store.commit('setHotWater', {
-        consumption_per_day: parseFloat(e.target.value||0)/1000
+        consumption_per_day: parseFloat(e.target.value || 0) / 1000
       })
     },
     // toggleOffline() {

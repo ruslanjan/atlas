@@ -28,8 +28,8 @@
     <div class="pt-8 mb-6">
       <label class="block text-xl mb-2" for="power_output_heating">
         Желаемая дневная выработка системы (кВт⋅ч)
-        <span class="text-gray-600 font-medium cursor-pointer" v-tippy
-              content="В среднем, для отопления дома нужен 1 кВт⋅ч на 10 м^2">?</span>
+        <button class="text-gray-600 font-medium cursor-pointer" v-tippy
+              content="В среднем, для отопления дома нужен 1 кВт⋅ч на 10 м^2">?</button>
       </label>
       <input
           :value="heating.power_usage||''"
