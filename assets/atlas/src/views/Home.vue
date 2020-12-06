@@ -8,15 +8,20 @@
       </svg>
     </div>
     <div id="ui" :class="`bg-white ${!showMap?'flex':'hidden'} md:flex flex-col px-6 py-12 overflow-y-scroll`">
+      <div class="flex">
+        <img src="logos/gef.png" class="h-8 pr-3" alt="">
+        <img src="logos/kz.jpg" class="h-8 pr-3" alt="">
+        <img src="logos/undp.png" class="h-8 pr-3" alt="">
+      </div>
       <div class="prose pb-5">
         <h2>
-          Калькулятор по применению возобновляемой энергии
+          Калькулятор солнечных источников энергии<button>?</button>
         </h2>
         <p>
           Узнайте требуемые тип и количество солнечного оборудования для ваших целей
         </p>
         <p>
-          Для начала выберите местоположение на карте
+          Для начала выберите местоположение на карте Республики Казахстан
         </p>
         <p v-if="location.selected_area_name">
           Выбрано: <strong>{{ location.selected_area_name }}</strong>
@@ -38,6 +43,8 @@
         <pre>&lt;iframe src="{{ host }}" height="600" width="500">
 &lt;/iframe></pre>
       </div>
+      <small class="text-gray-600">Калькулятор разработан в рамках совместного Проекта ПРООН-ГЭФ и Министерства Энергетики РК «Снижение рисков
+        инвестирования в возобновляемые источники энергии»</small>
     </div>
     <div id="mapContainer"></div>
   </div>
@@ -122,13 +129,14 @@ export default {
       this.$store.commit('setLocation', location)
       this.marker.bindPopup(`<b>${res.data.display_name}</b>.`).openPopup();
     });
-    L.tileLayer(host + "/dni/{z}/{x}/{y}.png", {
-      tms: true,
-      opacity: 0.7,
-      attribution: "",
-      minZoom: 1,
-      maxZoom: 12
-    }).addTo(this.map)
+    // If need insolation layer uncomment
+    // L.tileLayer(host + "/dni/{z}/{x}/{y}.png", {
+    //   tms: true,
+    //   opacity: 0.7,
+    //   attribution: "",
+    //   minZoom: 1,
+    //   maxZoom: 12
+    // }).addTo(this.map)
   },
   computed: {
     location() {
