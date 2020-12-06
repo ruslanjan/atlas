@@ -13,3 +13,5 @@ Kazakhstan_GISdata_LTAym_YearlyMonthlyTotals_GEOTIFF.zip
 .pyc
 __pycache__/
 atlas/__pycache__/
+node_modules
+
