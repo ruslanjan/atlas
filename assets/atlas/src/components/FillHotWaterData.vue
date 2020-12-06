@@ -2,7 +2,9 @@
   <div>
     <div class="prose">
       <h2>Горячее водоснабжение</h2>
-      <h4>Приблизительный расход горячей воды в литрах в сутки</h4>
+      <h4>Приблизительный расход горячей воды в литрах в сутки
+      <span class="text-gray-600 font-medium cursor-pointer" v-tippy
+              content="Вы можете подсчитать расход воды используя мини-калькулятор ниже">?</span></h4>
     </div>
     <div class="pt-8 mb-6">
       <label class="block text-xl mb-2" for="power_output_heating">

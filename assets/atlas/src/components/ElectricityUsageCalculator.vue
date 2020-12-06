@@ -124,6 +124,11 @@ export default {
         power: this.devices_select[device],
       })
     },
+    updatePowerUsage(value) { // in
+      this.$store.commit('setElectricity', {
+        power_usage: parseFloat(value || 0)
+      });
+    },
     getDevicesGrouped() {
       let current = '';
       let t = {};
@@ -146,6 +151,7 @@ export default {
         this.estimated = val.reduce((acc, v) => {
           return acc + v.power * v.count;
         }, 0)
+        this.updatePowerUsage(this.estimated)
       },
       deep: true
     }

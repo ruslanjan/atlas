@@ -18,7 +18,9 @@
     </div>
     <div class="pt-8 mb-6">
       <label class="block text-xl mb-2" for="power_output">
-        Желаемая выработка энергии (в кВт⋅ч в день)
+        Желаемая дневная выработка энергии (кВт⋅ч)
+        <span class="text-gray-600 font-medium cursor-pointer" v-tippy
+              content="Вы можете подсчитать ваш расход электроэнергии используя мини-калькулятор ниже">?</span>
       </label>
       <input
           :value="electricity.power_usage||''"
@@ -27,7 +29,7 @@
           id="power_output" type="number" placeholder="Пример: 10">
       <p class="text-sm font-normal pt-2">Не знаете сколько энергии вам нужно?
         <span class="link font-bold" @click="showCalculator = !showCalculator">
-          {{!showCalculator?'Узнать расход энергии':'Скрыть'}}
+          {{ !showCalculator ? 'Узнать расход энергии' : 'Скрыть' }}
         </span>
       </p>
       <div v-if="showCalculator" class="py-2">
@@ -39,6 +41,7 @@
 
 <script>
 import ElectricityUsageCalculator from "@/components/ElectricityUsageCalculator";
+
 export default {
   name: "FillElectricityData",
   components: {ElectricityUsageCalculator},
@@ -48,7 +51,7 @@ export default {
   methods: {
     updatePowerUsage(e) { // in
       this.$store.commit('setElectricity', {
-        power_usage: parseFloat(e.target.value||0)
+        power_usage: parseFloat(e.target.value || 0)
       });
     },
     toggleOffline() {

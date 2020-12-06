@@ -18,6 +18,8 @@
     "tailwindcss": "^1.9.5",
     "vue": "^2.6.11",
     "vue-router": "^3.2.0",
+    "vue-tippy": "^4.7.2",
+    "vue-toast-notification": "^0.6.0",
     "vuex": "^3.4.0"
   },
   "devDependencies": {

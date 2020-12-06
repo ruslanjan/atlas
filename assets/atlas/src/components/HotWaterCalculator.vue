@@ -87,6 +87,11 @@ export default {
         consume: 0,
       })
     },
+    updateConsumption(value) { // in m^3 per day. Input is in liters, but we will convert that to m^3 anyway.
+      this.$store.commit('setHotWater', {
+        consumption_per_day: parseFloat(value||0)/1000
+      })
+    },
     initItemFromDevice(index, device) {
       this.$set(this.items, index, {
         ...this.items[index],
@@ -116,6 +121,7 @@ export default {
         this.estimated = val.reduce((acc, v) => {
           return acc + v.consume * v.count;
         }, 0)
+        this.updateConsumption(this.estimated);
       },
       deep: true
     }
