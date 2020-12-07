@@ -162,7 +162,7 @@
 <script>
 import L from "leaflet";
 import html2pdf from "html2pdf.js";
-import {host} from "@/api";
+// import {host} from "@/api";
 
 // Energy conversion efficiency
 const ENERGY_CONVERSION_EFFICIENCY_OF_SOLAR_PANEL = 0.25;
