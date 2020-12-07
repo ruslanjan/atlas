@@ -284,13 +284,13 @@ export default {
       attribution:
           '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
     }).addTo(this.map);
-    L.tileLayer(host + "/dni/{z}/{x}/{y}.png", {
-      tms: true,
-      opacity: 0.7,
-      attribution: "",
-      minZoom: 1,
-      maxZoom: 12
-    }).addTo(this.map)
+    // L.tileLayer(host + "/dni/{z}/{x}/{y}.png", {
+    //   tms: true,
+    //   opacity: 0.7,
+    //   attribution: "",
+    //   minZoom: 1,
+    //   maxZoom: 12
+    // }).addTo(this.map)
     this.mapResizeInterval = setInterval(() => {
       this.map.invalidateSize()
     }, 400);
