@@ -16,7 +16,8 @@
       <div class="prose pb-5">
         <h2>
           Калькулятор солнечных источников энергии
-          <button id="manual" class="text-gray-600 font-medium rounded-full border border-gray-600 hover:bg-gray-300 text-lg cursor-pointer inline-block"
+          <button id="manual"
+                  class="text-gray-600 font-medium rounded-full border border-gray-600 hover:bg-gray-300 text-lg cursor-pointer inline-block"
                   style="vertical-align: super; width: 1.5em">?
           </button>
         </h2>
@@ -38,7 +39,26 @@
         </tippy>
         <p>
           Узнайте требуемые тип и количество солнечного оборудования для ваших целей
+          <button id="manual_2"
+                  class="text-gray-600 font-medium rounded-full border border-gray-600 hover:bg-gray-300 text-lg cursor-pointer inline-block"
+                  style="vertical-align: super; width: 2rem">?
+          </button>
         </p>
+        <tippy toSelector="#manual_2">
+          Для расчета технологий, вам необходимо подготовить данные о вашем энергопотреблении, введите данные в
+          соответствующие поля калькулятора и нажмите "Рассчитать" или воспользуйтесь подсказками. Калькулятор
+          обработает данные и отобразит их на странице результатов, данные доступны для скачивания.
+          <br/>
+          <strong>Методология:</strong>
+          <br/>
+          Калькулятор рассчитывает мощность и площадь солнечных панелей по следующей формуле:
+          <br/>
+          Площадь панелей = Желаемая выработка системы / (КПД панелей (20%) * Годовая инсоляция (Сколько солнечной
+          энергии поступает в год на 1 м^2 в данном регионе))
+          <br/>
+          Для солнечных коллекторов (ГВС и отопление) используется та же самая формула, но с соответствующим КПД системы
+          (65%)
+        </tippy>
         <p>
           Для начала выберите местоположение на карте Республики Казахстан
         </p>
