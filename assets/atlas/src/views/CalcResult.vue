@@ -123,7 +123,7 @@
             <div class="flex items-center">
               <img src="icons/solar-panel.svg" class="h-8 pr-3" alt="">
               <div>
-                Площадь солнечных коллекторов ~ {{ Math.ceil(calculateHotWater().solar_collector_area) }} м<sup>2</sup>
+                Площадь солнечных коллекторов ~ {{ Math.round(calculateHotWater().solar_collector_area) }} м<sup>2</sup>
               </div>
             </div>
             <div class="flex items-center">
