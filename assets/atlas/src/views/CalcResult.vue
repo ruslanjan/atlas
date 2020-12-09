@@ -116,7 +116,8 @@
             <div class="flex items-center">
               <img src="icons/bolt.svg" class="h-8 pr-3" alt="">
               <div>
-                Эквивалент годовой экономии электроэнергии ~ {{ calculateHotWater().need_energy.toFixed(2) }} л/сут
+                Эквивалент годовой экономии электроэнергии ~ {{ calculateHotWater().need_energy.toFixed(2) }} кВт⋅ч в
+                год
               </div>
             </div>
             <div class="flex items-center">
