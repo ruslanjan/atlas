@@ -5,20 +5,20 @@
       <h4>Тип системы солнечных панелей</h4>
     </div>
     <div class="my-4">
-      <label class="checkbox-container">Автономный
+      <label class="checkbox-container">Автономный (с аккамулятором)
         <input type="checkbox" v-bind:checked="electricity.offline" @click="toggleOffline">
         <span class="checkmark radio"></span>
       </label>
     </div>
     <div class="my-4">
-      <label class="checkbox-container">Сетевой (Нет аккумулятора)
+      <label class="checkbox-container">Сетевой (подключенная к сети)
         <input type="checkbox" v-bind:checked="!electricity.offline" @click="toggleOffline">
         <span class="checkmark radio"></span>
       </label>
     </div>
     <div class="pt-8 mb-6">
       <label class="block text-xl mb-2" for="power_output">
-        Желаемая дневная выработка энергии (кВт⋅ч)
+        Электрическая нагрузка (кВт)
         <button
             class="text-gray-600 font-medium rounded-full border border-gray-600 hover:bg-gray-300 text-lg cursor-pointer inline-block"
             style="vertical-align: super; width: 1.5em" v-tippy

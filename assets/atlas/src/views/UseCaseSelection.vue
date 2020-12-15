@@ -22,11 +22,11 @@
       <router-link class="md:hidden text-lg link rounded py-1" :to="{name: 'Home'}">В начало</router-link>
     </div>
     <div class="py-12 prose md:prose-xl">
-      <h2>Для каких целей желаете использовать возобновляемые источники энергии?</h2>
+      <h2>Для каких целей желаете использовать солнечные источники энергии?</h2>
     </div>
 
     <div class="my-4">
-      <label class="checkbox-container">Электричество
+      <label class="checkbox-container">Электроснабжение
         <input type="checkbox" v-bind:checked="electricity.active" @input="toggleElectricityStatus">
         <span class="checkmark"></span>
       </label>

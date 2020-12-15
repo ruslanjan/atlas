@@ -14,12 +14,12 @@ const initialState = () => ({
         active: false,
         offline: false,
         calculator_state: null,
-        power_usage: 0, // in kWh per day
+        power_usage: 0, // in kW
     },
 
     heating: {
         active: false,
-        power_usage: 0, // in kWh per day
+        power_usage: 0, // in kW
     },
 
     hotWater: {

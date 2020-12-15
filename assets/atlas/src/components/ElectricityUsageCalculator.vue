@@ -60,7 +60,7 @@
         <div class="text-2xl font-medium">+</div>
         <div class="pl-2">Добавить ещё прибор</div>
       </div>
-      <div>Итого: {{ estimated.toFixed(2) }} кВтч</div>
+      <div>Итого: {{ estimated.toFixed(2) }} кВт</div>
     </div>
   </div>
 </template>
@@ -202,6 +202,6 @@ export default {
 }
 
 .power::after {
-  content: "кВтч";
+  content: "кВт";
 }
 </style>

@@ -30,6 +30,12 @@
             <div class="flex items-center">
               <img src="icons/bolt.svg" class="h-8 pr-3" alt="">
               <div>
+                Мощность системы ~ {{ electricity.power_usage.toFixed(2) }} кВт
+              </div>
+            </div>
+            <div class="flex items-center">
+              <img src="icons/bolt.svg" class="h-8 pr-3" alt="">
+              <div>
                 Годовая выработка системы ~ {{ calculateElectricity().need_energy.toFixed(2) }} кВт⋅ч в
                 год
               </div>
@@ -37,13 +43,41 @@
             <div class="flex items-center">
               <img src="icons/solar-panel.svg" class="h-8 pr-3" alt="">
               <div>
-                Площадь солнечных панелей ~ {{ calculateElectricity().solar_panel_area.toFixed(2) }} м<sup>2</sup>
+                Площадь солнечных панелей ~ {{ calculateElectricity().solar_panel_area.toFixed(1) }} м<sup>2</sup>
+              </div>
+            </div>
+            <div class="flex items-center">
+              <img src="icons/solar-panel.svg" class="h-8 pr-3" alt="">
+              <div>
+                Количество типовых PV панель 2м<sup>2</sup> пиковой мощностью 500Вт ~
+                {{ Math.round(calculateElectricity().solar_panel_count) }} шт
               </div>
             </div>
             <div class="flex items-center">
               <img src="icons/tenge.svg" class="h-8 pr-3" alt="Стоимость">
               <div>
                 Приблизительная стоимость оборудования ~ {{ calculateElectricity().estimated_cost.toFixed(0) }} тг
+              </div>
+            </div>
+            <div class="flex items-center">
+              <img src="icons/tenge.svg" class="h-8 pr-3" alt="Стоимость">
+              <div>
+                Приблизительная стоимость комплектующих для сетевой системы (несущие рамы, инверторы, кабели) ~
+                {{ (calculateElectricity().estimated_cost * 0.75).toFixed(0) }} тг
+              </div>
+            </div>
+            <div class="flex items-center">
+              <img src="icons/tenge.svg" class="h-8 pr-3" alt="Стоимость">
+              <div>
+                Приблизительная стоимость комплектующих для автономной системы (АКБ, Контроллеры) ~
+                {{ (calculateElectricity().estimated_cost * 2.5).toFixed(0) }} тг
+              </div>
+            </div>
+            <div class="flex items-center">
+              <img src="icons/tenge.svg" class="h-8 pr-3" alt="Стоимость">
+              <div>
+                Приблизительная итоговая ориентировочная стоимость системы ~
+                {{ (calculateElectricity().estimated_cost * (2.5 + 0.75)).toFixed(0) }} тг
               </div>
             </div>
             <div class="flex items-center">
@@ -54,13 +88,13 @@
             </div>
           </div>
           <div class="prose">
-            <p>
+            <small>
               *солнечная энергия не может обеспечивать 100% энергозатрат,
               в связи с чем Вам необходимо иметь резервные
               источники электроэнергии.
               <br/>
               *Приведенные данные о выработке и стоимости носят информативный характер.
-            </p>
+            </small>
           </div>
         </div>
 
@@ -70,20 +104,54 @@
             <div class="flex items-center">
               <img src="icons/bolt.svg" class="h-8 pr-3" alt="">
               <div>
-                Отопительная выработка системы ~ {{ calculateHeating().need_energy.toFixed(2) }} кВт⋅ч в
+                Мощность системы ~ {{ heating.power_usage.toFixed(2) }} кВт
+              </div>
+            </div>
+            <div class="flex items-center">
+              <img src="icons/bolt.svg" class="h-8 pr-3" alt="">
+              <div>
+                Расчетная выработка системы ~ {{ calculateHeating().need_energy.toFixed(2) }} кВт⋅ч в
                 год
               </div>
             </div>
             <div class="flex items-center">
               <img src="icons/solar-panel.svg" class="h-8 pr-3" alt="">
               <div>
-                Площадь солнечных коллекторов ~ {{ calculateHeating().solar_collector_area.toFixed(2) }} м<sup>2</sup>
+                Площадь солнечных коллекторов ~ {{ Math.round(calculateHeating().solar_collector_area) }} м<sup>2</sup>
+              </div>
+            </div>
+            <div class="flex items-center">
+              <img src="icons/solar-panel.svg" class="h-8 pr-3" alt="">
+              <div>
+                Количество типовой солнечных коллекторов размером 2м<sup>2</sup> пиковой мощностью 1500Вт ~
+                {{ Math.round(calculateHeating().solar_collector_count) }} шт
               </div>
             </div>
             <div class="flex items-center">
               <img src="icons/tenge.svg" class="h-8 pr-3" alt="Стоимость">
               <div>
                 Приблизительная стоимость оборудования ~ {{ calculateHeating().estimated_cost.toFixed(0) }} тг
+              </div>
+            </div>
+            <div class="flex items-center">
+              <img src="icons/tenge.svg" class="h-8 pr-3" alt="Стоимость">
+              <div>
+                Приблизительная стоимость комплектующих для системы поддержки отопления (несущие рамы, трубы, насос,
+                контроллер) ~ {{ (calculateHeating().estimated_cost).toFixed(0) }} тг
+              </div>
+            </div>
+            <div class="flex items-center">
+              <img src="icons/tenge.svg" class="h-8 pr-3" alt="Стоимость">
+              <div>
+                Приблизительная Стоимость комплектующих для накопительной системы ГВС (+бак аккумулятор, расширбак) ~
+                {{ (calculateHeating().estimated_cost * 1.25).toFixed(0) }} тг
+              </div>
+            </div>
+            <div class="flex items-center">
+              <img src="icons/tenge.svg" class="h-8 pr-3" alt="Стоимость">
+              <div>
+                Приблизительная итоговая ориентировочная стоимость системы ~
+                {{ (calculateHeating().estimated_cost * 2.25).toFixed(0) }} тг
               </div>
             </div>
             <div class="flex items-center">
@@ -94,13 +162,13 @@
             </div>
           </div>
           <div class="prose">
-            <p>
+            <small>
               *солнечная энергия не может обеспечивать 100% тепла для отопления,
               в связи с чем пользователь должен
               будет иметь резервные источники отопления.
               <br/>
               *Приведенные данные о выработке и стоимости носят информативный характер.
-            </p>
+            </small>
           </div>
         </div>
 
@@ -127,9 +195,37 @@
               </div>
             </div>
             <div class="flex items-center">
+              <img src="icons/solar-panel.svg" class="h-8 pr-3" alt="">
+              <div>
+                Количество типовой солнечных коллекторов размером 2м<sup>2</sup> пиковой мощностью 1500Вт ~
+                {{ Math.round(calculateHotWater().solar_collector_count) }} шт
+              </div>
+            </div>
+            <div class="flex items-center">
               <img src="icons/tenge.svg" class="h-8 pr-3" alt="Стоимость">
               <div>
                 Приблизительная стоимость оборудования ~ {{ calculateHotWater().estimated_cost.toFixed(0) }} тг
+              </div>
+            </div>
+            <div class="flex items-center">
+              <img src="icons/tenge.svg" class="h-8 pr-3" alt="Стоимость">
+              <div>
+                Приблизительная стоимость комплектующих для системы поддержки отопления (несущие рамы, трубы, насос,
+                контроллер) ~ {{ (calculateHotWater().estimated_cost).toFixed(0) }} тг
+              </div>
+            </div>
+            <div class="flex items-center">
+              <img src="icons/tenge.svg" class="h-8 pr-3" alt="Стоимость">
+              <div>
+                Приблизительная Стоимость комплектующих для накопительной системы ГВС (+бак аккумулятор, расширбак) ~
+                {{ (calculateHotWater().estimated_cost * 1.25).toFixed(0) }} тг
+              </div>
+            </div>
+            <div class="flex items-center">
+              <img src="icons/tenge.svg" class="h-8 pr-3" alt="Стоимость">
+              <div>
+                Приблизительная итоговая ориентировочная стоимость системы ~
+                {{ (calculateHotWater().estimated_cost * 2.25).toFixed(0) }} тг
               </div>
             </div>
             <div class="flex items-center">
@@ -140,13 +236,13 @@
             </div>
           </div>
           <div class="prose">
-            <p>
+            <small>
               *солнечная энергия не может обеспечивать 100% затрат горячей воды,
               в связи с чем пользователь должен будет
               использовать резервные источники горячей воды.
               <br/>
               *Приведенные данные о выработке и стоимости носят информативный характер.
-            </p>
+            </small>
           </div>
         </div>
       </div>
@@ -165,13 +261,18 @@ import L from "leaflet";
 import html2pdf from "html2pdf.js";
 // import {host} from "@/api";
 
+const SOLAR_PANEL_POWER_KWT = 0.5;
+const SOLAR_PANEL_AREA_M2 = 2;
+const SOLAR_COLLECTOR_POWER_KWT = 1.5;
+const SOLAR_COLLECTOR_M3_WATER_PER_DAY = 100 / 1000;
+const SOLAR_COLLECTOR_AREA_M2 = 2;
 // Energy conversion efficiency
 const ENERGY_CONVERSION_EFFICIENCY_OF_SOLAR_PANEL = 0.25;
 const ENERGY_CONVERSION_EFFICIENCY_OF_SOLAR_COLLECTOR = 0.60;
 // // CO2 Coefficient
 const CO2_TONS_PER_KWH = 0.919 / 1000 // in tons of CO2 per kWh
 // // Price per m^2
-const SOLAR_PANEL_PRICE_PER_METER_SQUARED = 90000; // to be discussed
+const SOLAR_PANEL_PRICE_PER_METER_SQUARED = 90000; //
 const SOLAR_COLLECTOR_PRICE_PER_METER_SQUARED = 100000; //
 
 export default {
@@ -204,11 +305,16 @@ export default {
         estimated_cost: 0, // in Kazakhstan currency
         CO2_reduced: 0, // in ton/years
       };
-      res.need_energy = this.electricity.power_usage * 365;
-      res.solar_panel_area = res.need_energy /
-          (this.location.irradiation * ENERGY_CONVERSION_EFFICIENCY_OF_SOLAR_PANEL);
+      res.solar_panel_count = this.electricity.power_usage / SOLAR_PANEL_POWER_KWT;
+      res.solar_panel_area = res.solar_panel_count * SOLAR_PANEL_AREA_M2;
+
+      res.need_energy = this.location.irradiation * ENERGY_CONVERSION_EFFICIENCY_OF_SOLAR_PANEL * res.solar_panel_area;
+      // res.need_energy = this.electricity.power_usage * 365;
+      // res.solar_panel_area = res.need_energy /
+      //     (this.location.irradiation * ENERGY_CONVERSION_EFFICIENCY_OF_SOLAR_PANEL);
       res.estimated_cost = res.solar_panel_area * SOLAR_PANEL_PRICE_PER_METER_SQUARED;
       res.CO2_reduced = res.need_energy * CO2_TONS_PER_KWH;
+
       if (this.electricity.offline) {
         res.estimated_cost *= 2;
       }
@@ -221,9 +327,12 @@ export default {
         estimated_cost: 0, // in Kazakhstan currency
         CO2_reduced: 0, // in ton/years
       };
-      res.need_energy = this.heating.power_usage * 365;
-      res.solar_collector_area = res.need_energy /
-          (this.location.irradiation * ENERGY_CONVERSION_EFFICIENCY_OF_SOLAR_COLLECTOR);
+      // res.need_energy = this.heating.power_usage * 365;
+      // res.solar_collector_area = res.need_energy /
+      //     (this.location.irradiation * ENERGY_CONVERSION_EFFICIENCY_OF_SOLAR_COLLECTOR);
+      res.solar_collector_count = this.heating.power_usage / SOLAR_COLLECTOR_POWER_KWT;
+      res.solar_collector_area = res.solar_collector_count * SOLAR_COLLECTOR_AREA_M2;
+      res.need_energy = this.location.irradiation * ENERGY_CONVERSION_EFFICIENCY_OF_SOLAR_COLLECTOR * res.solar_collector_area;
       res.estimated_cost = res.solar_collector_area * SOLAR_COLLECTOR_PRICE_PER_METER_SQUARED;
       res.CO2_reduced = res.need_energy * CO2_TONS_PER_KWH;
 
@@ -243,9 +352,12 @@ export default {
       // so ∆T * cp * V * D
       // more appropriately 47 * 4.186 * V * 997
       //
-      res.need_energy = 47 * 4182 * this.hotWater.consumption_per_day/*V*/ * 997 / 3600 * 365 / 1000;
-      res.solar_collector_area = res.need_energy /
-          (this.location.irradiation * ENERGY_CONVERSION_EFFICIENCY_OF_SOLAR_COLLECTOR);
+      // res.need_energy = 47 * 4182 * this.hotWater.consumption_per_day/*V*/ * 997 / 3600 * 365 / 1000;
+      // res.solar_collector_area = res.need_energy /
+      //     (this.location.irradiation * ENERGY_CONVERSION_EFFICIENCY_OF_SOLAR_COLLECTOR);
+      res.solar_collector_count = this.hotWater.consumption_per_day / SOLAR_COLLECTOR_M3_WATER_PER_DAY;
+      res.solar_collector_area = res.solar_collector_count * SOLAR_COLLECTOR_AREA_M2;
+      res.need_energy = this.location.irradiation * ENERGY_CONVERSION_EFFICIENCY_OF_SOLAR_COLLECTOR * res.solar_collector_area;
       res.estimated_cost = res.solar_collector_area * SOLAR_COLLECTOR_PRICE_PER_METER_SQUARED;
       res.CO2_reduced = res.need_energy * CO2_TONS_PER_KWH;
       return res;
