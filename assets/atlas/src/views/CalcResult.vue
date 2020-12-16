@@ -30,58 +30,72 @@
             <div class="flex items-center">
               <img src="icons/bolt.svg" class="h-8 pr-3" alt="">
               <div>
-                Мощность системы ~ {{ electricity.power_usage.toFixed(2) }} кВт
+                Мощность системы ~
+                <span class="whitespace-nowrap">{{ electricity.power_usage.toFixed(2) }} кВт</span>
               </div>
             </div>
             <div class="flex items-center">
               <img src="icons/bolt.svg" class="h-8 pr-3" alt="">
               <div>
-                Годовая выработка системы ~ {{ calculateElectricity().need_energy.toFixed(2) }} кВт⋅ч в
-                год
+                Годовая выработка системы ~
+                <span class="whitespace-nowrap">{{ calculateElectricity().need_energy.toFixed(2) }} кВт⋅ч в год</span>
               </div>
             </div>
             <div class="flex items-center">
               <img src="icons/solar-panel.svg" class="h-8 pr-3" alt="">
               <div>
-                Площадь солнечных панелей ~ {{ calculateElectricity().solar_panel_area.toFixed(1) }} м<sup>2</sup>
+                Площадь солнечных панелей ~
+                <span class="whitespace-nowrap">{{
+                    calculateElectricity().solar_panel_area.toFixed(1)
+                  }} м<sup>2</sup></span>
               </div>
             </div>
             <div class="flex items-center">
               <img src="icons/solar-panel.svg" class="h-8 pr-3" alt="">
               <div>
                 Количество типовых PV панель 2м<sup>2</sup> пиковой мощностью 500Вт ~
-                {{ calculateElectricity().solar_panel_count }} шт
+                <span class="whitespace-nowrap">{{ calculateElectricity().solar_panel_count }} шт</span>
               </div>
             </div>
             <div class="flex items-center">
               <img src="icons/tenge.svg" class="h-8 pr-3" alt="Стоимость">
               <div>
-                Приблизительная стоимость панелей ~ {{ (calculateElectricity().panels_estimated_cost).toFixed(0) }} тг
+                Приблизительная стоимость панелей ~
+                <span class="whitespace-nowrap">{{
+                    (calculateElectricity().panels_estimated_cost).toFixed(0)
+                  }} тг</span>
               </div>
             </div>
             <div class="flex items-center">
               <img src="icons/tenge.svg" class="h-8 pr-3" alt="Стоимость">
               <div>
-                Приблизительная стоимость комплектующих ~ {{ (calculateElectricity().estimated_cost - calculateElectricity().panels_estimated_cost).toFixed(0) }} тг
+                Приблизительная стоимость комплектующих ~
+                <span class="whitespace-nowrap">
+                  {{
+                    (calculateElectricity().estimated_cost - calculateElectricity().panels_estimated_cost).toFixed(0)
+                  }} тг
+                </span>
               </div>
             </div>
             <div class="flex items-center">
               <img src="icons/tenge.svg" class="h-8 pr-3" alt="Стоимость">
               <div>
-                Приблизительная стоимость монтажа ~ {{ (calculateElectricity().estimated_cost * 0.3).toFixed(0) }} тг
+                Приблизительная стоимость монтажа ~
+                <span class="whitespace-nowrap">{{ (calculateElectricity().estimated_cost * 0.3).toFixed(0) }} тг</span>
               </div>
             </div>
             <div class="flex items-center">
               <img src="icons/tenge.svg" class="h-8 pr-3" alt="Стоимость">
               <div>
                 Приблизительная итоговая ориентировочная стоимость системы ~
-                {{ (calculateElectricity().estimated_cost * 1.3).toFixed(0) }} тг
+                <span class="whitespace-nowrap">{{ (calculateElectricity().estimated_cost * 1.3).toFixed(0) }} тг</span>
               </div>
             </div>
             <div class="flex items-center">
               <img src="icons/leaf.svg" class="h-8 pr-3" alt="">
               <div>
-                Сокращение выбросов CO2 ~ {{ (calculateElectricity().CO2_reduced).toFixed(2) }} т/год
+                Сокращение выбросов CO2 ~
+                <span class="whitespace-nowrap">{{ (calculateElectricity().CO2_reduced).toFixed(2) }} т/год</span>
               </div>
             </div>
           </div>
@@ -102,13 +116,14 @@
             <div class="flex items-center">
               <img src="icons/bolt.svg" class="h-8 pr-3" alt="">
               <div>
-                Мощность системы ~ {{ heating.power_usage.toFixed(2) }} кВт
+                Мощность системы ~ <span class="whitespace-nowrap">{{ heating.power_usage.toFixed(2) }} кВт</span>
               </div>
             </div>
             <div class="flex items-center">
               <img src="icons/bolt.svg" class="h-8 pr-3" alt="">
               <div>
-                Расчетная выработка системы ~ {{ calculateHeating().need_energy.toFixed(2) }} кВт⋅ч в
+                Расчетная выработка системы ~
+                <span class="whitespace-nowrap">{{ calculateHeating().need_energy.toFixed(2) }} кВт⋅ч в</span>
                 год
               </div>
             </div>
@@ -116,45 +131,52 @@
             <div class="flex items-center">
               <img src="icons/solar-panel.svg" class="h-8 pr-3" alt="">
               <div>
-                Площадь солнечных коллекторов ~ {{ Math.round(calculateHeating().solar_collector_area) }} м<sup>2</sup>
+                Площадь солнечных коллекторов ~
+                <span class="whitespace-nowrap">{{ Math.round(calculateHeating().solar_collector_area) }} м<sup>2</sup></span>
               </div>
             </div>
             <div class="flex items-center">
               <img src="icons/solar-panel.svg" class="h-8 pr-3" alt="">
               <div>
                 Количество типовой солнечных коллекторов размером 2м<sup>2</sup> пиковой мощностью 1500Вт ~
-                {{ calculateHeating().solar_collector_count }} шт
+                <span class="whitespace-nowrap">{{ calculateHeating().solar_collector_count }} шт</span>
               </div>
             </div>
             <div class="flex items-center">
               <img src="icons/tenge.svg" class="h-8 pr-3" alt="Стоимость">
               <div>
-                Приблизительная стоимость коллекторов ~ {{ calculateHeating().collectors_estimated_cost.toFixed(0) }} тг
+                Приблизительная стоимость коллекторов ~
+                <span class="whitespace-nowrap">{{ calculateHeating().collectors_estimated_cost.toFixed(0) }} тг</span>
               </div>
             </div>
             <div class="flex items-center">
               <img src="icons/tenge.svg" class="h-8 pr-3" alt="Стоимость">
               <div>
-                Приблизительная стоимость комплектующих ~ {{ (calculateHeating().estimated_cost - calculateHeating().collectors_estimated_cost).toFixed(0) }} тг
+                Приблизительная стоимость комплектующих ~
+                <span class="whitespace-nowrap">
+                  {{ (calculateHeating().estimated_cost - calculateHeating().collectors_estimated_cost).toFixed(0) }} тг
+                </span>
               </div>
             </div>
             <div class="flex items-center">
               <img src="icons/tenge.svg" class="h-8 pr-3" alt="Стоимость">
               <div>
-                Приблизительная стоимость монтажа ~ {{ (calculateHeating().estimated_cost * 0.3).toFixed(0) }} тг
+                Приблизительная стоимость монтажа ~
+                <span class="whitespace-nowrap">{{ (calculateHeating().estimated_cost * 0.3).toFixed(0) }} тг</span>
               </div>
             </div>
             <div class="flex items-center">
               <img src="icons/tenge.svg" class="h-8 pr-3" alt="Стоимость">
               <div>
                 Приблизительная итоговая ориентировочная стоимость системы ~
-                {{ (calculateHeating().estimated_cost * 1.3).toFixed(0) }} тг
+                <span class="whitespace-nowrap">{{ (calculateHeating().estimated_cost * 1.3).toFixed(0) }} тг</span>
               </div>
             </div>
             <div class="flex items-center">
               <img src="icons/leaf.svg" class="h-8 pr-3" alt="">
               <div>
-                Сокращение выбросов CO2 ~ {{ (calculateHeating().CO2_reduced).toFixed(2) }} т/год
+                Сокращение выбросов CO2 ~
+                <span class="whitespace-nowrap">{{ (calculateHeating().CO2_reduced).toFixed(2) }} т/год</span>
               </div>
             </div>
           </div>
@@ -175,57 +197,66 @@
             <div class="flex items-center">
               <img src="icons/tap-water.svg" class="h-8 pr-3" alt="">
               <div>
-                Расход горячей воды ~ {{ (hotWater.consumption_per_day * 1000).toFixed(2) }} л/сут
+                Расход горячей воды ~
+                <span class="whitespace-nowrap">{{ (hotWater.consumption_per_day * 1000).toFixed(2) }} л/сут</span>
               </div>
             </div>
             <div class="flex items-center">
               <img src="icons/bolt.svg" class="h-8 pr-3" alt="">
               <div>
-                Расчетная экономия электроэнергии в год ~ {{ calculateHotWater().need_energy.toFixed(2) }} кВт⋅ч
+                Расчетная экономия электроэнергии в год ~
+                <span class="whitespace-nowrap">{{ calculateHotWater().need_energy.toFixed(2) }} кВт⋅ч</span>
               </div>
             </div>
             <div class="flex items-center">
               <img src="icons/solar-panel.svg" class="h-8 pr-3" alt="">
               <div>
-                Площадь солнечных коллекторов ~ {{ Math.round(calculateHotWater().solar_collector_area) }} м<sup>2</sup>
+                Площадь солнечных коллекторов ~
+                <span class="whitespace-nowrap">{{ Math.round(calculateHotWater().solar_collector_area) }} м<sup>2</sup></span>
               </div>
             </div>
             <div class="flex items-center">
               <img src="icons/solar-panel.svg" class="h-8 pr-3" alt="">
               <div>
                 Количество типовой солнечных коллекторов размером 2м<sup>2</sup> пиковой мощностью 1500Вт ~
-                {{ calculateHotWater().solar_collector_count }} шт
+                <span class="whitespace-nowrap">{{ calculateHotWater().solar_collector_count }} шт</span>
               </div>
             </div>
             <div class="flex items-center">
               <img src="icons/tenge.svg" class="h-8 pr-3" alt="Стоимость">
               <div>
-                Приблизительная стоимость коллекторов ~ {{ calculateHotWater().collectors_estimated_cost.toFixed(0) }} тг
+                Приблизительная стоимость коллекторов ~
+                <span class="whitespace-nowrap">{{ calculateHotWater().collectors_estimated_cost.toFixed(0) }} тг</span>
               </div>
             </div>
             <div class="flex items-center">
               <img src="icons/tenge.svg" class="h-8 pr-3" alt="Стоимость">
               <div>
-                Приблизительная стоимость комплектующих ~ {{ (calculateHotWater().estimated_cost - calculateHotWater().collectors_estimated_cost).toFixed(0) }} тг
+                Приблизительная стоимость комплектующих ~
+                <span class="whitespace-nowrap">
+                  {{ (calculateHotWater().estimated_cost - calculateHotWater().collectors_estimated_cost).toFixed(0) }} тг
+                </span>
               </div>
             </div>
             <div class="flex items-center">
               <img src="icons/tenge.svg" class="h-8 pr-3" alt="Стоимость">
               <div>
-                Приблизительная стоимость монтажа ~ {{ (calculateHotWater().estimated_cost * 0.3).toFixed(0) }} тг
+                Приблизительная стоимость монтажа ~
+                <span class="whitespace-nowrap">{{ (calculateHotWater().estimated_cost * 0.3).toFixed(0) }} тг</span>
               </div>
             </div>
             <div class="flex items-center">
               <img src="icons/tenge.svg" class="h-8 pr-3" alt="Стоимость">
               <div>
                 Приблизительная итоговая ориентировочная стоимость системы ~
-                {{ (calculateHotWater().estimated_cost * 1.3).toFixed(0) }} тг
+                <span class="whitespace-nowrap">{{ (calculateHotWater().estimated_cost * 1.3).toFixed(0) }} тг</span>
               </div>
             </div>
             <div class="flex items-center">
               <img src="icons/leaf.svg" class="h-8 pr-3" alt="">
               <div>
-                Сокращение выбросов CO2 ~ {{ (calculateHotWater().CO2_reduced).toFixed(2) }} т/год
+                Сокращение выбросов CO2 ~
+                <span class="whitespace-nowrap">{{ (calculateHotWater().CO2_reduced).toFixed(2) }} т/год</span>
               </div>
             </div>
           </div>
@@ -269,7 +300,7 @@ const CO2_TONS_PER_KWH = 0.919 / 1000 // in tons of CO2 per kWh
 const SOLAR_PANEL_PRICE_PER_METER_SQUARED = 40_000; // prev: 90000
 const SOLAR_PANEL_PRICE_ACCESSORIES_COEFFICIENT = 0.7; // prev: 90000
 const SOLAR_PANEL_PRICE_OFFLINE_ACCESSORIES_COEFFICIENT = 1.5; // prev: 90000
-const SOLAR_COLLECTOR_PRICE_PER_METER_SQUARED = 150000/2; //
+const SOLAR_COLLECTOR_PRICE_PER_METER_SQUARED = 150000 / 2; //
 const SOLAR_COLLECTOR_PRICE_HEATING_COEFFICIENT = 1; //
 const SOLAR_COLLECTOR_PRICE_HOT_WATER_COEFFICIENT = 1.25; //
 
@@ -435,5 +466,7 @@ export default {
 </script>
 
 <style scoped>
-
+.whitespace-nowrap {
+  white-space: nowrap;
+}
 </style>
