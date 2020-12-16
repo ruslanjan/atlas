@@ -4,6 +4,7 @@ import Vuex from 'vuex'
 Vue.use(Vuex)
 
 const initialState = () => ({
+    can_calculate: true,
     location: {
         latlng: null,
         irradiation: null,
@@ -25,7 +26,7 @@ const initialState = () => ({
     hotWater: {
         active: false,
         calculator_state: null,
-        consumption_per_day: 0, // in m^3 per day
+        consumption_per_day: 100 / 1000, // in m^3 per day
     }
 })
 
@@ -46,6 +47,9 @@ const loadState = () => {
 let store = new Vuex.Store({
     state: loadState(),
     mutations: {
+        setCanCalculate(state, value) {
+            state.can_calculate = value
+        },
         setLocation(state, location) {
             state.location = {
                 ...state.location,

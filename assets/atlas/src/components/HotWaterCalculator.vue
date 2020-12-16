@@ -89,7 +89,7 @@ export default {
     },
     updateConsumption(value) { // in m^3 per day. Input is in liters, but we will convert that to m^3 anyway.
       this.$store.commit('setHotWater', {
-        consumption_per_day: parseFloat(value||0)/1000
+        consumption_per_day: Math.round(parseFloat(value||0)/1000 * 100) / 100
       })
     },
     initItemFromDevice(index, device) {

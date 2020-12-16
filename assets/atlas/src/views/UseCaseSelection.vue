@@ -47,8 +47,9 @@
     <div class="flex-grow"></div>
 
     <div class="flex flex-col align-stretch">
-      <component :is="!anyCaseSelected ? 'span' : 'router-link'" :to="{name: 'CalcResult'}"
-              :class="`btn ${!anyCaseSelected?'btn-disabled':''} hidden md:block`">Рассчитать</component>
+      <component :is="!anyCaseSelected || !can_calculate ? 'span' : 'router-link'" :to="{name: 'CalcResult'}"
+              :class="`btn ${!anyCaseSelected || !can_calculate?'btn-disabled':''} hidden md:block`">Рассчитать</component>
+
       <component :is="!anyCaseSelected ? 'span' : 'router-link'" :to="{name: 'FillingData'}"
                  :class="`btn ${!anyCaseSelected?'btn-disabled':''} md:hidden`">Продолжить</component>
     </div>
@@ -77,6 +78,10 @@ export default {
     }
   },
   computed: {
+    can_calculate() {
+      return this.$store.state.can_calculate;
+    },
+
     electricity() {
       return this.$store.state.electricity;
     },

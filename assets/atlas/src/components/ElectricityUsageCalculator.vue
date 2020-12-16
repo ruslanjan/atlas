@@ -126,7 +126,7 @@ export default {
     },
     updatePowerUsage(value) { // in
       this.$store.commit('setElectricity', {
-        power_usage: parseFloat(value || 0)
+        power_usage: Math.round(parseFloat(value || 0)*100)/100
       });
     },
     getDevicesGrouped() {

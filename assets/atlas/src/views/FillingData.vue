@@ -40,8 +40,8 @@
     </div>
     <div class="flex-grow"></div>
     <div class="flex flex-col align-stretch">
-      <router-link :to="{name: 'CalcResult'}"
-                   class="btn block md:hidden">Рассчитать</router-link>
+      <component :is="!can_calculate ? 'span' : 'router-link'" :to="{name: 'CalcResult'}"
+                 :class="`btn block md:hidden ${!can_calculate?'btn-disabled':''}`">Рассчитать</component>
     </div>
   </div>
 </template>
@@ -64,6 +64,10 @@ export default {
     },
   },
   computed: {
+    can_calculate() {
+      return this.$store.state.can_calculate;
+    },
+
     electricity() {
       return this.$store.state.electricity;
     },

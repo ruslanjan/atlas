@@ -32,7 +32,7 @@
     </div>
     <div class="pt-8 mb-6">
       <label class="block text-xl mb-2" for="power_output_heating">
-        Желаемая мощность системы (кВт)
+        Нагрузка на отопление (кВт)
         <button
             class="text-gray-600 font-medium rounded-full border border-gray-600 hover:bg-gray-300 text-lg cursor-pointer inline-block"
             style="vertical-align: super; width: 1.5em" v-tippy
