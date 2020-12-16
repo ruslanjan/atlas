@@ -249,7 +249,9 @@ const ENERGY_CONVERSION_EFFICIENCY_OF_SOLAR_COLLECTOR = 0.60;
 const CO2_TONS_PER_KWH = 0.919 / 1000 // in tons of CO2 per kWh
 // // Price per m^2
 const SOLAR_PANEL_PRICE_PER_METER_SQUARED = 40_000 * 1.7; // prev: 90000
-const SOLAR_COLLECTOR_PRICE_PER_METER_SQUARED = 150000/2 * 2.25; //
+const SOLAR_COLLECTOR_PRICE_PER_METER_SQUARED = 150000/2; //
+const SOLAR_COLLECTOR_PRICE_HEATING_COFFIECENT = 2.25; //
+const SOLAR_COLLECTOR_PRICE_HOT_WATER_COFFIECENT = 2; //
 
 export default {
   name: "CalcResult",
@@ -309,7 +311,7 @@ export default {
       res.solar_collector_count = Math.ceil(this.heating.power_usage / SOLAR_COLLECTOR_POWER_KWT);
       res.solar_collector_area = res.solar_collector_count * SOLAR_COLLECTOR_AREA_M2;
       res.need_energy = this.location.irradiation * ENERGY_CONVERSION_EFFICIENCY_OF_SOLAR_COLLECTOR * res.solar_collector_area;
-      res.estimated_cost = res.solar_collector_area * SOLAR_COLLECTOR_PRICE_PER_METER_SQUARED;
+      res.estimated_cost = res.solar_collector_area * SOLAR_COLLECTOR_PRICE_PER_METER_SQUARED * SOLAR_COLLECTOR_PRICE_HEATING_COFFIECENT;
       res.CO2_reduced = res.need_energy * CO2_TONS_PER_KWH;
 
       return res;
@@ -334,7 +336,7 @@ export default {
       res.solar_collector_count = Math.ceil(this.hotWater.consumption_per_day / SOLAR_COLLECTOR_M3_WATER_PER_DAY);
       res.solar_collector_area = res.solar_collector_count * SOLAR_COLLECTOR_AREA_M2;
       res.need_energy = this.location.irradiation * ENERGY_CONVERSION_EFFICIENCY_OF_SOLAR_COLLECTOR * res.solar_collector_area;
-      res.estimated_cost = res.solar_collector_area * SOLAR_COLLECTOR_PRICE_PER_METER_SQUARED;
+      res.estimated_cost = res.solar_collector_area * SOLAR_COLLECTOR_PRICE_PER_METER_SQUARED * SOLAR_COLLECTOR_PRICE_HOT_WATER_COFFIECENT;
       res.CO2_reduced = res.need_energy * CO2_TONS_PER_KWH;
       return res;
     },
