@@ -56,20 +56,26 @@
             <div class="flex items-center">
               <img src="icons/tenge.svg" class="h-8 pr-3" alt="Стоимость">
               <div>
-                Приблизительная стоимость оборудования ~ {{ calculateElectricity().estimated_cost.toFixed(0) }} тг
+                Приблизительная стоимость панелей ~ {{ (calculateElectricity().panels_estimated_cost).toFixed(0) }} тг
               </div>
             </div>
             <div class="flex items-center">
               <img src="icons/tenge.svg" class="h-8 pr-3" alt="Стоимость">
               <div>
-                Приблизительная стоимость монтажа ~ {{ (calculateElectricity().estimated_cost * 0.2).toFixed(0) }} тг
+                Приблизительная стоимость комплектующих ~ {{ (calculateElectricity().estimated_cost - calculateElectricity().panels_estimated_cost).toFixed(0) }} тг
+              </div>
+            </div>
+            <div class="flex items-center">
+              <img src="icons/tenge.svg" class="h-8 pr-3" alt="Стоимость">
+              <div>
+                Приблизительная стоимость монтажа ~ {{ (calculateElectricity().estimated_cost * 0.3).toFixed(0) }} тг
               </div>
             </div>
             <div class="flex items-center">
               <img src="icons/tenge.svg" class="h-8 pr-3" alt="Стоимость">
               <div>
                 Приблизительная итоговая ориентировочная стоимость системы ~
-                {{ (calculateElectricity().estimated_cost * 1.2).toFixed(0) }} тг
+                {{ (calculateElectricity().estimated_cost * 1.3).toFixed(0) }} тг
               </div>
             </div>
             <div class="flex items-center">
@@ -123,20 +129,26 @@
             <div class="flex items-center">
               <img src="icons/tenge.svg" class="h-8 pr-3" alt="Стоимость">
               <div>
-                Приблизительная стоимость оборудования ~ {{ calculateHeating().estimated_cost.toFixed(0) }} тг
+                Приблизительная стоимость коллекторов ~ {{ calculateHeating().collectors_estimated_cost.toFixed(0) }} тг
               </div>
             </div>
             <div class="flex items-center">
               <img src="icons/tenge.svg" class="h-8 pr-3" alt="Стоимость">
               <div>
-                Приблизительная стоимость монтажа ~ {{ (calculateHeating().estimated_cost * 0.2).toFixed(0) }} тг
+                Приблизительная стоимость комплектующих ~ {{ (calculateHeating().estimated_cost - calculateHeating().collectors_estimated_cost).toFixed(0) }} тг
+              </div>
+            </div>
+            <div class="flex items-center">
+              <img src="icons/tenge.svg" class="h-8 pr-3" alt="Стоимость">
+              <div>
+                Приблизительная стоимость монтажа ~ {{ (calculateHeating().estimated_cost * 0.3).toFixed(0) }} тг
               </div>
             </div>
             <div class="flex items-center">
               <img src="icons/tenge.svg" class="h-8 pr-3" alt="Стоимость">
               <div>
                 Приблизительная итоговая ориентировочная стоимость системы ~
-                {{ (calculateHeating().estimated_cost * 1.2).toFixed(0) }} тг
+                {{ (calculateHeating().estimated_cost * 1.3).toFixed(0) }} тг
               </div>
             </div>
             <div class="flex items-center">
@@ -188,20 +200,26 @@
             <div class="flex items-center">
               <img src="icons/tenge.svg" class="h-8 pr-3" alt="Стоимость">
               <div>
-                Приблизительная стоимость оборудования ~ {{ calculateHotWater().estimated_cost.toFixed(0) }} тг
+                Приблизительная стоимость коллекторов ~ {{ calculateHotWater().collectors_estimated_cost.toFixed(0) }} тг
               </div>
             </div>
             <div class="flex items-center">
               <img src="icons/tenge.svg" class="h-8 pr-3" alt="Стоимость">
               <div>
-                Приблизительная стоимость монтажа ~ {{ (calculateHotWater().estimated_cost * 0.2).toFixed(0) }} тг
+                Приблизительная стоимость комплектующих ~ {{ (calculateHotWater().estimated_cost - calculateHotWater().collectors_estimated_cost).toFixed(0) }} тг
+              </div>
+            </div>
+            <div class="flex items-center">
+              <img src="icons/tenge.svg" class="h-8 pr-3" alt="Стоимость">
+              <div>
+                Приблизительная стоимость монтажа ~ {{ (calculateHotWater().estimated_cost * 0.3).toFixed(0) }} тг
               </div>
             </div>
             <div class="flex items-center">
               <img src="icons/tenge.svg" class="h-8 pr-3" alt="Стоимость">
               <div>
                 Приблизительная итоговая ориентировочная стоимость системы ~
-                {{ (calculateHotWater().estimated_cost * 1.2).toFixed(0) }} тг
+                {{ (calculateHotWater().estimated_cost * 1.3).toFixed(0) }} тг
               </div>
             </div>
             <div class="flex items-center">
@@ -248,10 +266,12 @@ const ENERGY_CONVERSION_EFFICIENCY_OF_SOLAR_COLLECTOR = 0.60;
 // // CO2 Coefficient
 const CO2_TONS_PER_KWH = 0.919 / 1000 // in tons of CO2 per kWh
 // // Price per m^2
-const SOLAR_PANEL_PRICE_PER_METER_SQUARED = 40_000 * 1.7; // prev: 90000
+const SOLAR_PANEL_PRICE_PER_METER_SQUARED = 40_000; // prev: 90000
+const SOLAR_PANEL_PRICE_ACCESSORIES_COEFFICIENT = 0.7; // prev: 90000
+const SOLAR_PANEL_PRICE_OFFLINE_ACCESSORIES_COEFFICIENT = 1.5; // prev: 90000
 const SOLAR_COLLECTOR_PRICE_PER_METER_SQUARED = 150000/2; //
-const SOLAR_COLLECTOR_PRICE_HEATING_COEFFICIENT = 2; //
-const SOLAR_COLLECTOR_PRICE_HOT_WATER_COEFFICIENT = 2.25; //
+const SOLAR_COLLECTOR_PRICE_HEATING_COEFFICIENT = 1; //
+const SOLAR_COLLECTOR_PRICE_HOT_WATER_COEFFICIENT = 1.25; //
 
 export default {
   name: "CalcResult",
@@ -290,11 +310,14 @@ export default {
       // res.need_energy = this.electricity.power_usage * 365;
       // res.solar_panel_area = res.need_energy /
       //     (this.location.irradiation * ENERGY_CONVERSION_EFFICIENCY_OF_SOLAR_PANEL);
-      res.estimated_cost = res.solar_panel_area * SOLAR_PANEL_PRICE_PER_METER_SQUARED;
+      res.panels_estimated_cost = res.solar_panel_area * SOLAR_PANEL_PRICE_PER_METER_SQUARED;
       res.CO2_reduced = res.need_energy * CO2_TONS_PER_KWH;
 
+      res.estimated_cost = res.panels_estimated_cost;
       if (this.electricity.offline) {
-        res.estimated_cost *= 2.4705882353;
+        res.estimated_cost += res.panels_estimated_cost * (SOLAR_PANEL_PRICE_ACCESSORIES_COEFFICIENT + SOLAR_PANEL_PRICE_OFFLINE_ACCESSORIES_COEFFICIENT);
+      } else {
+        res.estimated_cost += res.panels_estimated_cost * SOLAR_PANEL_PRICE_ACCESSORIES_COEFFICIENT;
       }
       return res;
     },
@@ -311,7 +334,8 @@ export default {
       res.solar_collector_count = Math.ceil(this.heating.power_usage / SOLAR_COLLECTOR_POWER_KWT);
       res.solar_collector_area = res.solar_collector_count * SOLAR_COLLECTOR_AREA_M2;
       res.need_energy = this.location.irradiation * ENERGY_CONVERSION_EFFICIENCY_OF_SOLAR_COLLECTOR * res.solar_collector_area;
-      res.estimated_cost = res.solar_collector_area * SOLAR_COLLECTOR_PRICE_PER_METER_SQUARED * SOLAR_COLLECTOR_PRICE_HEATING_COEFFICIENT;
+      res.collectors_estimated_cost = res.solar_collector_area * SOLAR_COLLECTOR_PRICE_PER_METER_SQUARED;
+      res.estimated_cost = res.collectors_estimated_cost + res.collectors_estimated_cost * SOLAR_COLLECTOR_PRICE_HEATING_COEFFICIENT;
       res.CO2_reduced = res.need_energy * CO2_TONS_PER_KWH;
 
       return res;
@@ -336,7 +360,8 @@ export default {
       res.solar_collector_count = Math.ceil(this.hotWater.consumption_per_day / SOLAR_COLLECTOR_M3_WATER_PER_DAY);
       res.solar_collector_area = res.solar_collector_count * SOLAR_COLLECTOR_AREA_M2;
       res.need_energy = this.location.irradiation * ENERGY_CONVERSION_EFFICIENCY_OF_SOLAR_COLLECTOR * res.solar_collector_area;
-      res.estimated_cost = res.solar_collector_area * SOLAR_COLLECTOR_PRICE_PER_METER_SQUARED * SOLAR_COLLECTOR_PRICE_HOT_WATER_COEFFICIENT;
+      res.collectors_estimated_cost = res.solar_collector_area * SOLAR_COLLECTOR_PRICE_PER_METER_SQUARED;
+      res.estimated_cost = res.collectors_estimated_cost + res.collectors_estimated_cost * SOLAR_COLLECTOR_PRICE_HOT_WATER_COEFFICIENT;
       res.CO2_reduced = res.need_energy * CO2_TONS_PER_KWH;
       return res;
     },
