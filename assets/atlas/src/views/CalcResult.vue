@@ -77,7 +77,7 @@
                 </span>
               </div>
             </div>
-            <small class="text-gray-600">* Монтаж может стоит до 20% от стоимости оборудования</small>
+            <small class="text-gray-600">* Стоимость монтажа и комплектующих до 20% от стоимости оборудования</small>
             <div class="flex items-center">
               <img src="icons/tenge.svg" class="h-8 pr-3" alt="Стоимость">
               <div>
@@ -152,7 +152,7 @@
                 </span>
               </div>
             </div>
-            <small class="text-gray-600">* Монтаж может стоит до 20% от стоимости оборудования</small>
+            <small class="text-gray-600">* Стоимость монтажа и комплектующих до 20% от стоимости оборудования</small>
             <div class="flex items-center">
               <img src="icons/tenge.svg" class="h-8 pr-3" alt="Стоимость">
               <div>
@@ -226,7 +226,7 @@
                 </span>
               </div>
             </div>
-            <small class="text-gray-600">* Монтаж может стоит до 20% от стоимости оборудования</small>
+            <small class="text-gray-600">* Стоимость монтажа и комплектующих до 20% от стоимости оборудования</small>
             <div class="flex items-center">
               <img src="icons/tenge.svg" class="h-8 pr-3" alt="Стоимость">
               <div>
