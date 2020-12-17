@@ -53,7 +53,7 @@
             <div class="flex items-center">
               <img src="icons/solar-panel.svg" class="h-8 pr-3" alt="">
               <div>
-                Количество типовых PV панель 2м<sup>2</sup> пиковой мощностью 500Вт ~
+                Количество типовых PV панель 2м<sup>2</sup> пиковой мощностью 400Вт ~
                 <span class="whitespace-nowrap">{{ calculateElectricity().solar_panel_count }} шт</span>
               </div>
             </div>
@@ -77,18 +77,12 @@
                 </span>
               </div>
             </div>
-            <div class="flex items-center">
-              <img src="icons/tenge.svg" class="h-8 pr-3" alt="Стоимость">
-              <div>
-                Приблизительная стоимость монтажа ~
-                <span class="whitespace-nowrap">{{ (calculateElectricity().estimated_cost * 0.3).toFixed(0) }} тг</span>
-              </div>
-            </div>
+            <small class="text-gray-600">* Монтаж может стоит до 20% от стоимости оборудования</small>
             <div class="flex items-center">
               <img src="icons/tenge.svg" class="h-8 pr-3" alt="Стоимость">
               <div>
                 Приблизительная итоговая ориентировочная стоимость системы ~
-                <span class="whitespace-nowrap">{{ (calculateElectricity().estimated_cost * 1.3).toFixed(0) }} тг</span>
+                <span class="whitespace-nowrap">{{ (calculateElectricity().estimated_cost).toFixed(0) }} тг</span>
               </div>
             </div>
             <div class="flex items-center">
@@ -158,18 +152,12 @@
                 </span>
               </div>
             </div>
-            <div class="flex items-center">
-              <img src="icons/tenge.svg" class="h-8 pr-3" alt="Стоимость">
-              <div>
-                Приблизительная стоимость монтажа ~
-                <span class="whitespace-nowrap">{{ (calculateHeating().estimated_cost * 0.3).toFixed(0) }} тг</span>
-              </div>
-            </div>
+            <small class="text-gray-600">* Монтаж может стоит до 20% от стоимости оборудования</small>
             <div class="flex items-center">
               <img src="icons/tenge.svg" class="h-8 pr-3" alt="Стоимость">
               <div>
                 Приблизительная итоговая ориентировочная стоимость системы ~
-                <span class="whitespace-nowrap">{{ (calculateHeating().estimated_cost * 1.3).toFixed(0) }} тг</span>
+                <span class="whitespace-nowrap">{{ (calculateHeating().estimated_cost).toFixed(0) }} тг</span>
               </div>
             </div>
             <div class="flex items-center">
@@ -238,18 +226,12 @@
                 </span>
               </div>
             </div>
-            <div class="flex items-center">
-              <img src="icons/tenge.svg" class="h-8 pr-3" alt="Стоимость">
-              <div>
-                Приблизительная стоимость монтажа ~
-                <span class="whitespace-nowrap">{{ (calculateHotWater().estimated_cost * 0.3).toFixed(0) }} тг</span>
-              </div>
-            </div>
+            <small class="text-gray-600">* Монтаж может стоит до 20% от стоимости оборудования</small>
             <div class="flex items-center">
               <img src="icons/tenge.svg" class="h-8 pr-3" alt="Стоимость">
               <div>
                 Приблизительная итоговая ориентировочная стоимость системы ~
-                <span class="whitespace-nowrap">{{ (calculateHotWater().estimated_cost * 1.3).toFixed(0) }} тг</span>
+                <span class="whitespace-nowrap">{{ (calculateHotWater().estimated_cost).toFixed(0) }} тг</span>
               </div>
             </div>
             <div class="flex items-center">
@@ -298,11 +280,11 @@ const ENERGY_CONVERSION_EFFICIENCY_OF_SOLAR_COLLECTOR = 0.60;
 const CO2_TONS_PER_KWH = 0.919 / 1000 // in tons of CO2 per kWh
 // // Price per m^2
 const SOLAR_PANEL_PRICE_PER_METER_SQUARED = 40_000; // prev: 90000
-const SOLAR_PANEL_PRICE_ACCESSORIES_COEFFICIENT = 0.7; // prev: 90000
-const SOLAR_PANEL_PRICE_OFFLINE_ACCESSORIES_COEFFICIENT = 2.5; // prev: 90000
+const SOLAR_PANEL_PRICE_ACCESSORIES_COEFFICIENT = 0.7;
+const SOLAR_PANEL_PRICE_OFFLINE_ACCESSORIES_COEFFICIENT = 2.5;
 const SOLAR_COLLECTOR_PRICE_PER_METER_SQUARED = 150000 / 2; //
-const SOLAR_COLLECTOR_PRICE_HEATING_COEFFICIENT = 1; //
-const SOLAR_COLLECTOR_PRICE_HOT_WATER_COEFFICIENT = 1.25; //
+const SOLAR_COLLECTOR_PRICE_HEATING_COEFFICIENT = 0.7; //
+const SOLAR_COLLECTOR_PRICE_HOT_WATER_COEFFICIENT = 0.8; //
 
 export default {
   name: "CalcResult",
