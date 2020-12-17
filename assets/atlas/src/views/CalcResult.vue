@@ -53,7 +53,7 @@
             <div class="flex items-center">
               <img src="icons/solar-panel.svg" class="h-8 pr-3" alt="">
               <div>
-                Количество типовых PV панель 2м<sup>2</sup> пиковой мощностью 400Вт ~
+                Количество типовых PV панелей 2м<sup>2</sup> пиковой мощностью 400Вт ~
                 <span class="whitespace-nowrap">{{ calculateElectricity().solar_panel_count }} шт</span>
               </div>
             </div>
