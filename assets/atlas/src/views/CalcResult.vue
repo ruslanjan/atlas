@@ -77,7 +77,7 @@
                 </span>
               </div>
             </div>
-            <small class="text-gray-600">* Стоимость монтажа и комплектующих до 20% от стоимости оборудования</small>
+            <small class="text-gray-600">* Стоимость монтажа может составлять от ~25% от стоимости оборудования</small>
             <div class="flex items-center">
               <img src="icons/tenge.svg" class="h-8 pr-3" alt="Стоимость">
               <div>
@@ -121,7 +121,7 @@
                 год
               </div>
             </div>
-            <small class="text-gray-600">* На зимний период приходится ~30% выработки системы</small>
+            <small class="text-gray-600">* На зимнее полугодие приходится ~30% годовой выработки системы</small>
             <div class="flex items-center">
               <img src="icons/solar-panel.svg" class="h-8 pr-3" alt="">
               <div>
@@ -152,7 +152,7 @@
                 </span>
               </div>
             </div>
-            <small class="text-gray-600">* Стоимость монтажа и комплектующих до 20% от стоимости оборудования</small>
+            <small class="text-gray-600">* Стоимость монтажа может составлять от ~25% от стоимости оборудования</small>
             <div class="flex items-center">
               <img src="icons/tenge.svg" class="h-8 pr-3" alt="Стоимость">
               <div>
@@ -226,7 +226,7 @@
                 </span>
               </div>
             </div>
-            <small class="text-gray-600">* Стоимость монтажа и комплектующих до 20% от стоимости оборудования</small>
+            <small class="text-gray-600">* Стоимость монтажа может составлять от ~25% от стоимости оборудования</small>
             <div class="flex items-center">
               <img src="icons/tenge.svg" class="h-8 pr-3" alt="Стоимость">
               <div>
@@ -283,8 +283,8 @@ const SOLAR_PANEL_PRICE_PER_METER_SQUARED = 40_000; // prev: 90000
 const SOLAR_PANEL_PRICE_ACCESSORIES_COEFFICIENT = 0.7;
 const SOLAR_PANEL_PRICE_OFFLINE_ACCESSORIES_COEFFICIENT = 2.5;
 const SOLAR_COLLECTOR_PRICE_PER_METER_SQUARED = 150000 / 2; //
-const SOLAR_COLLECTOR_PRICE_HEATING_COEFFICIENT = 0.7; //
-const SOLAR_COLLECTOR_PRICE_HOT_WATER_COEFFICIENT = 0.8; //
+const SOLAR_COLLECTOR_PRICE_HEATING_COEFFICIENT = 0.85; //
+const SOLAR_COLLECTOR_PRICE_HOT_WATER_COEFFICIENT = 1; //
 
 export default {
   name: "CalcResult",
