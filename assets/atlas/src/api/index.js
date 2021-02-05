@@ -1,1 +1,1 @@
-export const host = ('http://82.200.154.74:5000') || 'http://localhost:5000'
+export const host = ('http://195.210.47.199:5000') || 'http://localhost:5000'
